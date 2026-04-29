@@ -112,10 +112,10 @@ textarea.form-control:focus {
 }
 
 .form-check-label {
-  margin-left: 10px;
+  margin-left: 0px;
   cursor: pointer;
-  color: #555;
-  font-weight: 500;
+  color: #999999;
+  font-weight: 300;
 }
 
 /* Buttons */

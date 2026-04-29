@@ -16,4 +16,8 @@ export class MasterService {
     return this.http.get('https://api.freeprojectapi.com/api/Enquiry/get-statuses');
   }
 
+  saveEnquiry(obj: any){
+    return this.http.post('https://api.freeprojectapi.com/api/Enquiry/create-enquiry', obj);
+  }
+
 }

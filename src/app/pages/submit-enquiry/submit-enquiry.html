@@ -25,19 +25,19 @@
                 <label for="customerName" class="form-label fw-bold">
                   <i class="fa fa-user-circle text-info me-2"></i>Full Name
                 </label>
-                <input type="text" class="form-control form-control-lg" id="customerName" placeholder="Enter your full name" required>
+                <input type="text" class="form-control form-control-lg" id="customerName" name="customerName" [(ngModel)]="newEnquiryObj.customerName" placeholder="Enter your full name" required>
               </div>
               <div class="col-md-6">
                 <label for="customerPhone" class="form-label fw-bold">
                   <i class="fa fa-phone text-info me-2"></i>Phone Number
                 </label>
-                <input type="tel" class="form-control form-control-lg" id="customerPhone" placeholder="Enter your phone number" required>
+                <input type="tel" class="form-control form-control-lg" id="customerPhone" name="customerPhone" [(ngModel)]="newEnquiryObj.customerPhone" placeholder="Enter your phone number" required>
               </div>
               <div class="col-12">
                 <label for="customerEmail" class="form-label fw-bold">
                   <i class="fa fa-envelope text-info me-2"></i>Email Address
                 </label>
-                <input type="email" class="form-control form-control-lg" id="customerEmail" placeholder="Enter your email address" required>
+                <input type="email" class="form-control form-control-lg" id="customerEmail" name="customerEmail" [(ngModel)]="newEnquiryObj.customerEmail" placeholder="Enter your email address" required>
               </div>
             </div>
           </div>
@@ -53,24 +53,22 @@
                 <label for="enquiryType" class="form-label fw-bold">
                   <i class="fa fa-tag text-success me-2"></i>Enquiry Type
                 </label>
-                <input type="text" class="form-control form-control-lg" id="enquiryType" placeholder="e.g., Product, Service, General" required>
+                <input type="text" class="form-control form-control-lg" id="enquiryType" name="enquiryType" [(ngModel)]="newEnquiryObj.enquiryType" placeholder="e.g., Product, Service, General" required>
               </div>
               <div class="col-md-6">
                 <label for="categoryId" class="form-label fw-bold">
                   <i class="fa fa-list text-success me-2"></i>Category
                 </label>
-                <select class="form-select form-select-lg" id="categoryId" required>
+                <select class="form-select form-select-lg" id="categoryId" name="categoryId" [(ngModel)]="newEnquiryObj.categoryId" required>
                   <option value="" selected disabled>Select a category</option>
-                  @for (item of categoryList; track $index) {
-                    <option [value]="item.categoryId">{{item.categoryName}}</option>
-                  }
+                  <option *ngFor="let item of categoryList" [ngValue]="item.categoryId">{{item.categoryName}}</option>
                 </select>
               </div>
               <div class="col-12">
                 <label for="message" class="form-label fw-bold">
                   <i class="fa fa-pencil text-success me-2"></i>Message
                 </label>
-                <textarea class="form-control form-control-lg" id="message" rows="6" placeholder="Please describe your enquiry in detail..." required></textarea>
+                <textarea class="form-control form-control-lg" id="message" name="message" [(ngModel)]="newEnquiryObj.message" rows="6" placeholder="Please describe your enquiry in detail..." required></textarea>
               </div>
             </div>
           </div>
@@ -86,36 +84,34 @@
                 <label for="statusId" class="form-label fw-bold">
                   <i class="fa fa-hourglass-o text-warning me-2"></i>Status
                 </label>
-                <select class="form-select form-select-lg" id="statusId" required>
+                <select class="form-select form-select-lg" id="statusId" name="statusId" [(ngModel)]="newEnquiryObj.statusId" required>
 
                   <option value="" selected disabled>Select a status</option>
-                  @for (item of statusList; track $index) {
-                    <option [value]="item.statusId">{{item.statusName}}</option>
-                  }
+                  <option *ngFor="let item of statusList" [ngValue]="item.statusId">{{item.statusName}}</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="enquiryDate" class="form-label fw-bold">
                   <i class="fa fa-calendar text-warning me-2"></i>Enquiry Date
                 </label>
-                <input type="date" class="form-control form-control-lg" id="enquiryDate" required>
+                <input type="date" class="form-control form-control-lg" id="enquiryDate" name="enquiryDate" [(ngModel)]="newEnquiryObj.enquiryDate" required>
               </div>
               <div class="col-md-6">
                 <label for="followUpDate" class="form-label fw-bold">
                   <i class="fa fa-calendar-check-o text-warning me-2"></i>Follow-up Date
                 </label>
-                <input type="date" class="form-control form-control-lg" id="followUpDate">
+                <input type="date" class="form-control form-control-lg" id="followUpDate" name="followUpDate" [(ngModel)]="newEnquiryObj.followUpDate">
               </div>
               
               <div class="col-md-6">
                 <label for="isConverted" class="form-label fw-bold">
-                  <i class="fa fa-check-circle text-warning me-2"></i>Converted
+                  <i class="fa fa-check-circle text-warning me-2"></i>Mark as converted
                 </label>
                 <div class="form-check form-switch mt-2">
-                  <input class="form-check-input" type="checkbox" id="isConverted">
-                  
+                  <input class="form-check-input" type="checkbox" id="isConverted" name="isConverted" [(ngModel)]="newEnquiryObj.isConverted">
+                
                   <label class="form-check-label" for="isConverted">
-                    Mark as converted
+                    Toggle when the Enquiry becomes a sale or opprotunity
                   </label>
                 </div>
               </div>
@@ -133,7 +129,7 @@
                 <label for="feedback" class="form-label fw-bold">
                   <i class="fa fa-star text-info me-2"></i>Feedback (Optional)
                 </label>
-                <textarea class="form-control form-control-lg" id="feedback" rows="4" placeholder="Share your feedback or additional comments..."></textarea>
+                <textarea class="form-control form-control-lg" id="feedback" name="feedback" [(ngModel)]="newEnquiryObj.feedback" rows="4" placeholder="Share your feedback or additional comments..."></textarea>
               </div>
             </div>
           </div>
@@ -144,7 +140,7 @@
               <button type="reset" class="btn btn-outline-secondary btn-lg">
                 <i class="fa fa-undo me-2"></i>Clear Form
               </button>
-              <button type="submit" class="btn btn-primary btn-lg">
+              <button type="button" (click)="onSaveEnquiry()" class="btn btn-primary btn-lg">
                 <i class="fa fa-paper-plane-o me-2"></i>Submit Enquiry
               </button>
             </div>
