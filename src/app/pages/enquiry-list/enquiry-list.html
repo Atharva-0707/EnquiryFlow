@@ -16,33 +16,34 @@
     <!-- Enquiry Cards -->
     <div class="row g-4">
       <!-- Card 1 -->
-      <div class="col-lg-6">
+       @for (item of enquiryList; track $index) {
+        <div class="col-lg-6">
         <div class="enquiry-card card border-0 shadow-sm">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
-                <h5 class="card-title fw-bold text-primary mb-1">Atharva</h5>
-                <p class="text-muted small mb-1">Enquiry ID: 483</p>
-                <p class="text-muted small mb-0">Enquiry Date: 30-Apr-2026</p>
+                <h5 class="card-title fw-bold text-primary mb-1">{{item.customerName}}</h5>
+                <p class="text-muted small mb-1">{{item.enquiryId}}</p>
+                <p class="text-muted small mb-0">{{item.enquiryDate | date:'dd-MMM-yyyy'}}</p>
               </div>
               <span class="badge bg-success">Resolved</span>
             </div>
 
             <div class="row row-cols-2 row-cols-md-2 g-2 mb-3 small">
-              <div class="col"><strong>Email</strong><br><span class="text-muted">abc@gmail.com</span></div>
-              <div class="col"><strong>Phone</strong><br><span class="text-muted">1234567890</span></div>
-              <div class="col"><strong>Type</strong><br><span class="text-muted">Product</span></div>
-              <div class="col"><strong>Converted</strong><br><span class="text-muted">No</span></div>
-              <div class="col"><strong>Category ID</strong><br><span class="text-muted">419</span></div>
-              <div class="col"><strong>Status ID</strong><br><span class="text-muted">245</span></div>
-              <div class="col"><strong>Follow-up</strong><br><span class="text-muted">02-May-2026</span></div>
+              <div class="col"><strong>Email</strong><br><span class="text-muted">{{item.customerEmail}}</span></div>
+              <div class="col"><strong>Phone</strong><br><span class="text-muted">{{item.customerPhone}}</span></div>
+              <div class="col"><strong>Type</strong><br><span class="text-muted">{{item.enquiryType}}</span></div>
+              <div class="col"><strong>Converted</strong><br><span class="text-muted">{{item.isConverted}}</span></div>
+              <div class="col"><strong>Category ID</strong><br><span class="text-muted">{{item.categoryId}}</span></div>
+              <div class="col"><strong>Status ID</strong><br><span class="text-muted">{{item.statusId}}</span></div>
+              <div class="col"><strong>Follow-up</strong><br><span class="text-muted">{{item.followUpDate}}</span></div>
             </div>
 
             <div class="mb-3">
               <p class="text-muted small mb-1"><strong>Message</strong></p>
-              <p class="text-dark small mb-2">I am interested in learning more about your product features and pricing options...</p>
+              <p class="text-dark small mb-2">{{item.message}}</p>
               <p class="text-muted small mb-1"><strong>Feedback</strong></p>
-              <p class="text-dark small mb-0">The onboarding experience was smooth, but I need more details about custom pricing.</p>
+              <p class="text-dark small mb-0">{{item.feedback}}</p>
             </div>
 
             <div class="d-flex justify-content-end gap-2">
@@ -54,83 +55,9 @@
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="col-lg-6">
-        <div class="enquiry-card card border-0 shadow-sm">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <div>
-                <h5 class="card-title fw-bold text-primary mb-1">John Doe</h5>
-                <p class="text-muted small mb-1">Enquiry ID: 484</p>
-                <p class="text-muted small mb-0">Enquiry Date: 28-Apr-2026</p>
-              </div>
-              <span class="badge bg-warning">In Progress</span>
-            </div>
+       }
+      
 
-            <div class="row row-cols-2 row-cols-md-2 g-2 mb-3 small">
-              <div class="col"><strong>Email</strong><br><span class="text-muted">john@example.com</span></div>
-              <div class="col"><strong>Phone</strong><br><span class="text-muted">9876543210</span></div>
-              <div class="col"><strong>Type</strong><br><span class="text-muted">Technical</span></div>
-              <div class="col"><strong>Converted</strong><br><span class="text-muted">Yes</span></div>
-              <div class="col"><strong>Category ID</strong><br><span class="text-muted">420</span></div>
-              <div class="col"><strong>Status ID</strong><br><span class="text-muted">246</span></div>
-              <div class="col"><strong>Follow-up</strong><br><span class="text-muted">01-May-2026</span></div>
-            </div>
-
-            <div class="mb-3">
-              <p class="text-muted small mb-1"><strong>Message</strong></p>
-              <p class="text-dark small mb-2">Having issues with login functionality. Need urgent assistance to resolve this matter...</p>
-              <p class="text-muted small mb-1"><strong>Feedback</strong></p>
-              <p class="text-dark small mb-0">Login flow should allow password reset and show clear error messages.</p>
-            </div>
-
-            <div class="d-flex justify-content-end gap-2">
-              <button class="btn btn-sm btn-outline-primary"><i class="fa fa-eye me-1"></i>View</button>
-              <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit me-1"></i>Edit</button>
-              <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash me-1"></i>Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="col-lg-6">
-        <div class="enquiry-card card border-0 shadow-sm">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <div>
-                <h5 class="card-title fw-bold text-primary mb-1">Sarah Smith</h5>
-                <p class="text-muted small mb-1">Enquiry ID: 485</p>
-                <p class="text-muted small mb-0">Enquiry Date: 26-Apr-2026</p>
-              </div>
-              <span class="badge bg-danger">Pending</span>
-            </div>
-
-            <div class="row row-cols-2 row-cols-md-2 g-2 mb-3 small">
-              <div class="col"><strong>Email</strong><br><span class="text-muted">sarah@example.com</span></div>
-              <div class="col"><strong>Phone</strong><br><span class="text-muted">5555555555</span></div>
-              <div class="col"><strong>Type</strong><br><span class="text-muted">Payment</span></div>
-              <div class="col"><strong>Converted</strong><br><span class="text-muted">No</span></div>
-              <div class="col"><strong>Category ID</strong><br><span class="text-muted">421</span></div>
-              <div class="col"><strong>Status ID</strong><br><span class="text-muted">247</span></div>
-              <div class="col"><strong>Follow-up</strong><br><span class="text-muted">30-Apr-2026</span></div>
-            </div>
-
-            <div class="mb-3">
-              <p class="text-muted small mb-1"><strong>Message</strong></p>
-              <p class="text-dark small mb-2">Question about subscription renewal and billing cycle information needed urgently...</p>
-              <p class="text-muted small mb-1"><strong>Feedback</strong></p>
-              <p class="text-dark small mb-0">The billing section should clearly list renewal dates and payment options.</p>
-            </div>
-
-            <div class="d-flex justify-content-end gap-2">
-              <button class="btn btn-sm btn-outline-primary"><i class="fa fa-eye me-1"></i>View</button>
-              <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit me-1"></i>Edit</button>
-              <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash me-1"></i>Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
