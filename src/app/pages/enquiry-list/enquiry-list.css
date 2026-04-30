@@ -1,0 +1,206 @@
+/* Enquiry List Container */
+.enquiry-list-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+/* Page Header */
+.display-5 {
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.display-5 i {
+  font-size: 2.5rem;
+  color: #0d6efd;
+}
+
+/* Enquiry Card */
+.enquiry-card {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  animation: slideInUp 0.5s ease-out;
+}
+
+.enquiry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Card Title */
+.card-title {
+  font-size: 1.1rem;
+  color: #0d6efd;
+}
+
+/* Badge Styles */
+.badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.bg-success-light {
+  background-color: #d1e7dd !important;
+}
+
+.text-success {
+  color: #198754 !important;
+}
+
+.bg-warning-light {
+  background-color: #fff3cd !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.bg-danger-light {
+  background-color: #f8d7da !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.bg-info-light {
+  background-color: #cfe2ff !important;
+}
+
+.text-info {
+  color: #0dcaf0 !important;
+}
+
+.bg-secondary-light {
+  background-color: #e2e3e5 !important;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+
+/* Message Preview */
+.message-preview {
+  border-left: 4px solid #0d6efd;
+  background-color: #f8f9fa !important;
+}
+
+.message-preview p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #495057;
+}
+
+
+
+/* Buttons */
+.btn-sm {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.btn-outline-secondary {
+  border: 2px solid #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+.btn-outline-danger {
+  border: 2px solid #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);
+  border: none;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+  transform: translateY(-1px);
+}
+
+/* Contact Info */
+.text-muted {
+  color: #6c757d !important;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon Colors */
+.fa-envelope,
+.fa-phone {
+  color: #0dcaf0;
+}
+
+.fa-user-circle {
+  color: #0d6efd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .enquiry-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-sm {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .display-5 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .row.g-4 > .col-lg-6 {
+    flex: 0 0 100%;
+  }
+
+  .d-md-flex {
+    flex-direction: column !important;
+  }
+
+  .btn-sm {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
