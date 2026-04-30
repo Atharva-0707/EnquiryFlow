@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,18 +9,24 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('Enquiry-Management-System');
+  protected readonly title = 'Enquiry-Management-System';
 
-  isLoggedIn = signal(false);
-  username = signal('');
+  router = inject(Router);
+
+  get isLoggedIn(): boolean {
+    return localStorage.getItem('enquiryApp') !== null;
+  }
+
+  get username(): string {
+    return localStorage.getItem('enquiryApp') ?? '';
+  }
 
   login() {
-    this.isLoggedIn.set(true);
-    this.username.set('User'); // Static username
+    this.router.navigateByUrl('/login');
   }
 
   logout() {
-    this.isLoggedIn.set(false);
-    this.username.set('');
+    localStorage.removeItem('enquiryApp');
+    this.router.navigateByUrl('/login');
   }
 }
