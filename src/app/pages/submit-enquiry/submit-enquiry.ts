@@ -2,6 +2,7 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MasterService } from '../../services/master-service';
 import { FormsModule } from '@angular/forms';
+import { EnquiryModel } from '../../model/class/Enquiry.Model';
 
 
 @Component({
@@ -20,20 +21,7 @@ export class SubmitEnquiry implements OnInit {
   statusList: any[] = []; 
   categoryList: any[] = [];
 
-  newEnquiryObj:any = {
-  "enquiryId": 0,
-  "customerName": "",
-  "customerEmail": "",
-  "customerPhone": "",
-  "message": "",
-  "categoryId": 0,
-  "statusId": 0,
-  "enquiryType": "",
-  "isConverted": false,
-  "enquiryDate": "",
-  "followUpDate": "",
-  "feedback": ""
-}
+  newEnquiryObj:EnquiryModel = new EnquiryModel();
 
   ngOnInit(): void {
     this.getStatus(); 
