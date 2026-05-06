@@ -86,14 +86,17 @@
                         </div>
                     </div>
 
-                    <!-- Enquiry Status Section -->
+                   
+
+                    <!-- Additional Information Section -->
+                     
                     <div class="form-section mb-5">
                         <div class="section-header mb-4">
-                            <i class="fa fa-flag text-warning"></i>
-                            <h3 class="d-inline-block ms-2">Status & Dates</h3>
+                            <i class="fa fa-lightbulb-o text-info"></i>
+                            <h3 class="d-inline-block ms-2">Additional Information</h3>
                         </div>
                         <div class="row g-3">
-                            @if (newEnquiryObj.enquiryId == 0) {
+                            @if (newEnquiryObj.enquiryId !== 0) {
                             <div class="col-md-6">
                                 <label for="statusId" class="form-label fw-bold">
                                     <i class="fa fa-hourglass-o text-warning me-2"></i>Status
@@ -126,19 +129,13 @@
                                         [(ngModel)]="newEnquiryObj.isConverted">
 
                                     <label class="form-check-label" for="isConverted">
-                                        Toggle when the Enquiry becomes a sale or opprotunity
+                                        Toggle when the Enquiry becomes a sale or opportunity
                                     </label>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Additional Information Section -->
-                    <div class="form-section mb-5">
-                        <div class="section-header mb-4">
-                            <i class="fa fa-lightbulb-o text-info"></i>
-                            <h3 class="d-inline-block ms-2">Additional Information</h3>
-                        </div>
+
                         <div class="row g-3">
                             <div class="col-12">
                                 <label for="feedback" class="form-label fw-bold">

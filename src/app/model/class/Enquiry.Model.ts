@@ -4,8 +4,8 @@ export class EnquiryModel {
     customerEmail: string;
     customerPhone: string;
     message: string;
-    categoryId: number;
-    statusId: number;
+    categoryId: string;
+    statusId: string;
     enquiryType: string;
     isConverted: boolean;
     enquiryDate: Date;
@@ -18,8 +18,8 @@ export class EnquiryModel {
         this.customerEmail = "";
         this.customerPhone = "";
         this.message = "";
-        this.categoryId = 0;
-        this.statusId = 0;
+        this.categoryId = "";
+        this.statusId = "";
         this.enquiryType = "";
         this.isConverted = false;
         this.enquiryDate = new Date();
