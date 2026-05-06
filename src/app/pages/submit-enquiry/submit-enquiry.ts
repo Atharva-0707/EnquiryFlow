@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MasterService } from '../../services/master-service';
 import { FormsModule } from '@angular/forms';
 import { EnquiryModel } from '../../model/class/Enquiry.Model';
+import { ICategory, IStatus } from '../../model/interface/master.Model';
 
 
 @Component({
@@ -18,8 +19,8 @@ export class SubmitEnquiry implements OnInit {
   masterService = inject(MasterService); 
   cdr = inject(ChangeDetectorRef);
 
-  statusList: any[] = []; 
-  categoryList: any[] = [];
+  statusList: IStatus[] = []; 
+  categoryList: ICategory[] = [];
 
   newEnquiryObj:EnquiryModel = new EnquiryModel();
 
@@ -47,6 +48,7 @@ export class SubmitEnquiry implements OnInit {
   }
 
   onSaveEnquiry(){
+    this.newEnquiryObj.statusId = '1';
     this.masterService.saveEnquiry(this.newEnquiryObj).subscribe({
       next:(result: any)=>{
         alert('Enquiry Submitted Successfully!');
