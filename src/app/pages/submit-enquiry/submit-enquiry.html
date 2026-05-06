@@ -71,7 +71,7 @@
                                 <select class="form-select form-select-lg" id="categoryId" name="categoryId"
                                     [(ngModel)]="newEnquiryObj.categoryId" required>
                                     <option value="" selected disabled>Select a category</option>
-                                    <option *ngFor="let item of categoryList" [ngValue]="item.categoryId">
+                                    <option *ngFor="let item of $categoryList | async" [ngValue]="item.categoryId">
                                         {{item.categoryName}}</option>
                                 </select>
                             </div>
@@ -105,7 +105,7 @@
                                     [(ngModel)]="newEnquiryObj.statusId" required>
 
                                     <option value="" selected disabled>Select a status</option>
-                                    <option *ngFor="let item of statusList" [ngValue]="item.statusId">
+                                    <option *ngFor="let item of $statusList | async" [ngValue]="item.statusId">
                                         {{item.statusName}}</option>
                                 </select>
                             </div>

@@ -9,3 +9,10 @@ export interface ICategory {
     categoryName: string;
     isActive: boolean;
 }
+
+export interface IApiResponseModel {
+    error: any[];
+    result: boolean;
+    data: any[];
+    message: string;
+}
