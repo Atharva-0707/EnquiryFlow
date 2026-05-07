@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonImports } from '../../Global.constant';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [CommonImports],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

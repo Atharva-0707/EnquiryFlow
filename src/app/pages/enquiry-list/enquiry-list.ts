@@ -1,12 +1,12 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MasterService } from '../../services/master-service';
-import { DatePipe } from '@angular/common';
 import { IEnquiry } from '../../model/interface/master.Model';
 import { Subscription } from 'rxjs';
+import { CommonImports } from '../../Global.constant';
 
 @Component({
   selector: 'app-enquiry-list',
-  imports: [DatePipe],
+  imports: [CommonImports],
   templateUrl: './enquiry-list.html',
   styleUrl: './enquiry-list.css',
 })
