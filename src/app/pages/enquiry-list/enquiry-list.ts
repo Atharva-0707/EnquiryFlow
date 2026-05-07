@@ -2,6 +2,7 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MasterService } from '../../services/master-service';
 import { DatePipe } from '@angular/common';
 import { IEnquiry } from '../../model/interface/master.Model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-enquiry-list',
@@ -16,17 +17,23 @@ export class EnquiryList implements OnInit {
 
   cdr = inject(ChangeDetectorRef);
 
+  subscribe !: Subscription;
+
   ngOnInit(): void {
     this.getAllEnquiry();
-  } 
+  }
 
-  getAllEnquiry(){
-    this.masterService.getAllEnquiry().subscribe({
-      next:(result: any)=>{
+  getAllEnquiry() {
+    this.subscribe = this.masterService.getAllEnquiry().subscribe({
+      next: (result: any) => {
         this.enquiryList = result.data;
         this.cdr.detectChanges();
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscribe?.unsubscribe();
   }
 
 }
