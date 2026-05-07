@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MasterService } from '../../services/master-service';
 import { DatePipe } from '@angular/common';
+import { IEnquiry } from '../../model/interface/master.Model';
 
 @Component({
   selector: 'app-enquiry-list',
@@ -11,7 +12,7 @@ import { DatePipe } from '@angular/common';
 export class EnquiryList implements OnInit {
 
   masterService = inject(MasterService);
-  enquiryList: any[] = [];
+  enquiryList: IEnquiry[] = [];
 
   cdr = inject(ChangeDetectorRef);
 
