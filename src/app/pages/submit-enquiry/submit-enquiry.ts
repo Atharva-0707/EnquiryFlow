@@ -1,10 +1,10 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MasterService } from '../../services/master-service';
 import { FormsModule } from '@angular/forms';
 import { EnquiryModel } from '../../model/class/Enquiry.Model';
 import { ICategory, IStatus } from '../../model/interface/master.Model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   styleUrl: './submit-enquiry.css',
 })
 
-export class SubmitEnquiry implements OnInit {
+export class SubmitEnquiry implements OnInit, OnDestroy {
 
   masterService = inject(MasterService); 
   cdr = inject(ChangeDetectorRef);
@@ -27,6 +27,8 @@ export class SubmitEnquiry implements OnInit {
   $categoryList: Observable<ICategory[]> = new Observable<ICategory[]>;
 
   newEnquiryObj:EnquiryModel = new EnquiryModel();
+
+  subscription!: Subscription;
 
   constructor(){
     this.$categoryList = this.masterService.getAllCategory();
@@ -58,7 +60,7 @@ export class SubmitEnquiry implements OnInit {
 
   onSaveEnquiry(){
     this.newEnquiryObj.statusId = '1';
-    this.masterService.saveEnquiry(this.newEnquiryObj).subscribe({
+    this.subscription = this.masterService.saveEnquiry(this.newEnquiryObj).subscribe({
       next:(result: any)=>{
         alert('Enquiry Submitted Successfully!');
       },
@@ -66,6 +68,10 @@ export class SubmitEnquiry implements OnInit {
         alert('Error from API');
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
 }
