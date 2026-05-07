@@ -1,21 +1,30 @@
 <!-- Hero Section -->
 <section class="hero-section bg-primary text-white py-5">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row align-items-center g-4">
       <div class="col-md-8">
-        <h1 class="display-4 fw-bold mb-4">Welcome to Enquiry Management System</h1>
+        <h1 class="display-4 fw-bold mb-3">
+          <i class="fa fa-inbox me-3"></i>Welcome to Enquiry Management System
+        </h1>
         <p class="lead mb-4">
           Streamline your enquiry management process with our comprehensive and user-friendly application. 
-          Track, manage, and respond to customer inquiries efficiently.
+          Track, manage, and respond to customer inquiries efficiently with ease.
         </p>
-        <a href="/submit-enquiry" class="btn btn-light btn-lg">Submit an Enquiry</a>
+        <div>
+          <a href="/submit-enquiry" class="btn btn-light btn-lg me-2 fw-bold">
+            <i class="fa fa-paper-plane-o me-2"></i>Submit an Enquiry
+          </a>
+          <a href="/enquiry-list" class="btn btn-outline-light btn-lg fw-bold">
+            <i class="fa fa-list-ul me-2"></i>View Enquiries
+          </a>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="card bg-light border-0">
-          <div class="card-body text-center">
-            <i class="fa fa-envelope fa-3x mb-3"></i>
-            <h4 class="card-title">Easy to Use</h4>
-            <p class="card-text">Simple and intuitive interface for managing enquiries</p>
+        <div class="card border-0 shadow">
+          <div class="card-body text-center p-4">
+            <i class="fa fa-rocket fa-4x text-primary mb-3"></i>
+            <h4 class="card-title fw-bold">Easy to Use</h4>
+            <p class="card-text text-muted">Simple and intuitive interface for managing enquiries with minimal effort</p>
           </div>
         </div>
       </div>
@@ -26,41 +35,54 @@
 <!-- Features Section -->
 <section class="features-section py-5">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold">Our Features</h2>
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-primary mb-3">
+        <i class="fa fa-star me-2"></i>Our Features
+      </h2>
+      <p class="lead text-muted">Powerful tools designed to simplify your workflow</p>
+    </div>
     <div class="row g-4">
       <div class="col-md-6 col-lg-3">
-        <div class="card h-100 text-center border-0 shadow-sm">
-          <div class="card-body">
-            <i class="fa fa-list fa-2x text-primary mb-3"></i>
-            <h5 class="card-title">View Enquiries</h5>
-            <p class="card-text">Browse and track all your submitted enquiries with real-time status updates</p>
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-3">
+              <i class="fa fa-list-check fa-3x text-primary"></i>
+            </div>
+            <h5 class="card-title fw-bold mb-2">View Enquiries</h5>
+            <p class="card-text text-muted small">Browse and track all your submitted enquiries with real-time status updates</p>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
-        <div class="card h-100 text-center border-0 shadow-sm">
-          <div class="card-body">
-            <i class="fa fa-plus-circle fa-2x text-success mb-3"></i>
-            <h5 class="card-title">Submit Enquiry</h5>
-            <p class="card-text">Quickly submit new enquiries with detailed information and attachments</p>
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-3">
+              <i class="fa fa-plus-circle fa-3x text-success"></i>
+            </div>
+            <h5 class="card-title fw-bold mb-2">Submit Enquiry</h5>
+            <p class="card-text text-muted small">Quickly submit new enquiries with detailed information and feedback</p>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
-        <div class="card h-100 text-center border-0 shadow-sm">
-          <div class="card-body">
-            <i class="fa fa-flag fa-2x text-warning mb-3"></i>
-            <h5 class="card-title">Check Status</h5>
-            <p class="card-text">Monitor the status of your enquiries at every stage of the process</p>
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-3">
+              <i class="fa fa-hourglass-end fa-3x text-warning"></i>
+            </div>
+            <h5 class="card-title fw-bold mb-2">Check Status</h5>
+            <p class="card-text text-muted small">Monitor the status of your enquiries at every stage of the process</p>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
-        <div class="card h-100 text-center border-0 shadow-sm">
-          <div class="card-body">
-            <i class="fa fa-database fa-2x text-info mb-3"></i>
-            <h5 class="card-title">Analytics</h5>
-            <p class="card-text">Access detailed analytics and reports on enquiry categories and trends</p>
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-3">
+              <i class="fa fa-chart-bar fa-3x text-info"></i>
+            </div>
+            <h5 class="card-title fw-bold mb-2">Analytics</h5>
+            <p class="card-text text-muted small">Access detailed analytics and reports on enquiry categories and trends</p>
           </div>
         </div>
       </div>
@@ -71,49 +93,62 @@
 <!-- Benefits Section -->
 <section class="benefits-section bg-light py-5">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold">Why Choose Us?</h2>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="d-flex">
-          <div class="me-3">
-            <i class="fa fa-check-circle text-success fa-2x"></i>
-          </div>
-          <div>
-            <h5 class="fw-bold">Fast Processing</h5>
-            <p>Quick and efficient handling of all your enquiries with minimal processing time</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="d-flex">
-          <div class="me-3">
-            <i class="fa fa-lock text-primary fa-2x"></i>
-          </div>
-          <div>
-            <h5 class="fw-bold">Secure & Private</h5>
-            <p>Your data is protected with enterprise-grade security and privacy measures</p>
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-primary mb-3">
+        <i class="fa fa-thumbs-up me-2"></i>Why Choose Us?
+      </h2>
+      <p class="lead text-muted">Industry-leading features to support your success</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="benefit-card p-4 bg-white rounded-3 shadow-sm">
+          <div class="d-flex">
+            <div class="me-3 flex-shrink-0">
+              <i class="fa fa-bolt text-success fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark mb-2">Fast Processing</h5>
+              <p class="text-muted small mb-0">Quick and efficient handling of all your enquiries with minimal processing time and maximum reliability</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6 mb-4">
-        <div class="d-flex">
-          <div class="me-3">
-            <i class="fa fa-mobile text-info fa-2x"></i>
-          </div>
-          <div>
-            <h5 class="fw-bold">Responsive Design</h5>
-            <p>Access the system from any device - desktop, tablet, or mobile phone</p>
+      <div class="col-md-6">
+        <div class="benefit-card p-4 bg-white rounded-3 shadow-sm">
+          <div class="d-flex">
+            <div class="me-3 flex-shrink-0">
+              <i class="fa fa-shield text-primary fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark mb-2">Secure & Private</h5>
+              <p class="text-muted small mb-0">Your data is protected with enterprise-grade security and privacy measures to keep you safe</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6 mb-4">
-        <div class="d-flex">
-          <div class="me-3">
-            <i class="fa fa-users text-warning fa-2x"></i>
+      <div class="col-md-6">
+        <div class="benefit-card p-4 bg-white rounded-3 shadow-sm">
+          <div class="d-flex">
+            <div class="me-3 flex-shrink-0">
+              <i class="fa fa-mobile text-info fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark mb-2">Responsive Design</h5>
+              <p class="text-muted small mb-0">Access the system from any device - desktop, tablet, or mobile phone seamlessly</p>
+            </div>
           </div>
-          <div>
-            <h5 class="fw-bold">Dedicated Support</h5>
-            <p>Our support team is available to assist you with any questions or issues</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="benefit-card p-4 bg-white rounded-3 shadow-sm">
+          <div class="d-flex">
+            <div class="me-3 flex-shrink-0">
+              <i class="fa fa-headphones text-warning fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark mb-2">Dedicated Support</h5>
+              <p class="text-muted small mb-0">Our support team is available to assist you with any questions or issues anytime</p>
+            </div>
           </div>
         </div>
       </div>
@@ -123,10 +158,20 @@
 
 <!-- CTA Section -->
 <section class="cta-section bg-primary text-white py-5">
-  <div class="container text-center">
-    <h2 class="mb-4 fw-bold">Ready to Get Started?</h2>
-    <p class="lead mb-4">Join thousands of users who trust our Enquiry Management System</p>
-    <a href="/submit-enquiry" class="btn btn-light btn-lg me-2">Submit Enquiry</a>
-    <a href="/enquiry-list" class="btn btn-outline-light btn-lg">View Enquiries</a>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="display-5 mb-3 fw-bold">
+        <i class="fa fa-rocket me-2"></i>Ready to Get Started?
+      </h2>
+      <p class="lead mb-4">Join thousands of users who trust our Enquiry Management System</p>
+      <div>
+        <a href="/submit-enquiry" class="btn btn-light btn-lg me-2 fw-bold">
+          <i class="fa fa-paper-plane-o me-2"></i>Submit Enquiry
+        </a>
+        <a href="/enquiry-list" class="btn btn-outline-light btn-lg fw-bold">
+          <i class="fa fa-list-ul me-2"></i>View Enquiries
+        </a>
+      </div>
+    </div>
   </div>
 </section>

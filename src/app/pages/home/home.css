@@ -3,65 +3,87 @@
   min-height: 500px;
   display: flex;
   align-items: center;
+  padding: 60px 0;
 }
 
 .hero-section h1 {
   font-size: 3rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
 }
 
 .hero-section .card {
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: white !important;
+}
+
+.hero-section .card i {
+  color: #0d6efd;
 }
 
 .features-section {
-  padding: 80px 0;
+  padding: 60px 0;
+  background: #ffffff;
 }
 
 .features-section h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #0d6efd;
+  font-weight: 700;
+}
+
+.feature-card {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(13, 110, 253, 0.15) !important;
+}
+
+.icon-wrapper {
+  display: inline-block;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background: #f0f6ff;
 }
 
 .card {
-  border-radius: 10px;
+  border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
-}
-
-.card i {
-  color: #0d6efd;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12) !important;
 }
 
 .benefits-section {
-  padding: 80px 0;
+  padding: 60px 0;
+  background: #f8f9fa;
 }
 
 .benefits-section h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #0d6efd;
+  font-weight: 700;
 }
 
-.benefits-section .d-flex {
-  padding: 20px;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+.benefit-card {
+  transition: all 0.3s ease;
+  border: none;
 }
 
-.benefits-section h5 {
-  color: #333;
-  font-size: 1.3rem;
+.benefit-card:hover {
+  box-shadow: 0 12px 35px rgba(13, 110, 253, 0.1) !important;
+  transform: translateY(-4px);
 }
 
-.benefits-section p {
-  color: #666;
-  margin: 0;
+.benefit-card .fa {
+  min-width: 50px;
 }
 
 .cta-section {
@@ -72,9 +94,32 @@
 .cta-section h2 {
   font-size: 2.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
 }
 
 .cta-section .lead {
   font-size: 1.3rem;
-  opacity: 0.9;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .features-section h2,
+  .benefits-section h2,
+  .cta-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-2px);
+  }
 }

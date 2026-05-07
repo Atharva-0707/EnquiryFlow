@@ -8,8 +8,8 @@ export class EnquiryModel {
     statusId: string;
     enquiryType: string;
     isConverted: boolean;
-    enquiryDate: Date;
-    followUpDate: Date;
+    enquiryDate: string;
+    followUpDate: string;
     feedback: string;
 
     constructor() {
@@ -22,8 +22,8 @@ export class EnquiryModel {
         this.statusId = "";
         this.enquiryType = "";
         this.isConverted = false;
-        this.enquiryDate = new Date();
-        this.followUpDate = new Date();
+        this.enquiryDate = "";
+        this.followUpDate = "";
         this.feedback = "";
     }
 

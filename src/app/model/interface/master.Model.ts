@@ -27,7 +27,7 @@ export interface IEnquiry {
     statusId: number;
     enquiryType: string;
     isConverted: boolean;
-    enquiryDate: Date;
-    followUpDate: Date;
+    enquiryDate: string;
+    followUpDate: string;
     feedback: string;
 }
