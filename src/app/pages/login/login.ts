@@ -21,7 +21,7 @@ export class Login {
     if(this.loginObj.username == 'admin' && this.loginObj.password == 'admin123'){
       alert('Login Success');
       localStorage.setItem('enquiryApp', 'admin');
-      this.router.navigateByUrl('/enquiry-list');
+      this.router.navigateByUrl('/home');
     }
     else {
       alert('Invalid Credentials');

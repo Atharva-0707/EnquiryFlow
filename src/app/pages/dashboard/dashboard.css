@@ -1,0 +1,70 @@
+/* Dashboard Page Styles */
+.dashboard-hero {
+	background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);
+	color: white;
+}
+
+.dashboard-hero h1 {
+	font-size: 2.75rem;
+	font-weight: 700;
+}
+
+.dashboard-card {
+	border-radius: 18px;
+	background: white;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 18px 40px rgba(13, 110, 253, 0.18);
+}
+
+.dashboard-card h4 {
+	color: #0d6efd;
+}
+
+.dashboard-card ul {
+	padding-left: 0;
+	list-style: none;
+}
+
+.dashboard-card ul li {
+	margin-bottom: 0.75rem;
+}
+
+.dashboard-card ul li i {
+	width: 24px;
+}
+
+.dashboard-features {
+	background: #ffffff;
+}
+
+.feature-box {
+	border-radius: 18px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 18px 40px rgba(13, 110, 253, 0.12) !important;
+}
+
+.dashboard-summary {
+	background: #f8f9fa;
+}
+
+.dashboard-summary .card {
+	border-radius: 18px;
+}
+
+.dashboard-summary .badge {
+	border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+	.dashboard-hero h1 {
+		font-size: 2rem;
+	}
+}
