@@ -128,10 +128,10 @@ Use the following test credentials:
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | Start development server (ng serve) |
-| `npm run build` | Build production bundle (ng build) |
-| `npm run watch` | Build in watch mode for development |
-| `npm test` | Run unit tests using Vitest |
+| `ng serve` | Start development server |
+| `ng build` | Build production bundle |
+| `ng build --watch` | Build in watch mode for development |
+| `ng test` | Run unit tests using Vitest |
 
 
 ## 📊 Data Models
@@ -182,7 +182,9 @@ interface IStatus {
 ## 👨‍💻 Author
 
 Created by Atharva Srivastava
+
 **GitHub:**   https://github.com/Atharva-0707
+
 **LinkedIn:** https://linkedin.com/in/atharva-srivastava-83073429a 
 
 
@@ -191,6 +193,31 @@ Created by Atharva Srivastava
 - Bootstrap for responsive UI components
 - Font Awesome for beautiful icons
 - Free Project API for backend services
+
+
+## 📷 Screenshots
+
+### Login
+<img width="2880" height="1620" alt="image" src="https://github.com/user-attachments/assets/d6a3a46b-2876-47a7-bec1-05f582b0e142" />
+
+
+### Dashboard
+<img width="2878" height="1616" alt="image" src="https://github.com/user-attachments/assets/fe4c164f-499a-4dbf-ab59-be6c1fd0730a" />
+
+
+### Home
+<img width="2880" height="1618" alt="image" src="https://github.com/user-attachments/assets/3bc78235-6e60-4161-84ea-48313e89677c" />
+<img width="2880" height="1624" alt="image" src="https://github.com/user-attachments/assets/e4005ef5-a356-4f9a-b0a9-fe9b97b8a246" />
+
+
+### Enquiry List
+<img width="2880" height="1620" alt="image" src="https://github.com/user-attachments/assets/46cffc7d-c152-48dd-ad61-c023fb41c365" />
+
+
+### Submit Enquiry
+<img width="2880" height="1618" alt="image" src="https://github.com/user-attachments/assets/332e1807-6fd7-4300-8ebe-5d43281b5caa" />
+<img width="2880" height="1588" alt="image" src="https://github.com/user-attachments/assets/bde39b1b-0085-4849-9f67-1844ad608250" />
+
 
 
 ---
