@@ -4,6 +4,7 @@ import { Login } from './pages/login/login';
 import { SubmitEnquiry } from './pages/submit-enquiry/submit-enquiry';
 import { EnquiryList } from './pages/enquiry-list/enquiry-list';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
 
@@ -14,7 +15,8 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: Home,  
+        component: Home, 
+        canActivate: [authGuard] 
     },
     {
         path: 'login',
@@ -27,6 +29,7 @@ export const routes: Routes = [
     {
         path: 'enquiry-list',
         component: EnquiryList,
+        canActivate: [authGuard] 
     },
     {
         path: 'dashboard',

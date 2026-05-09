@@ -16,7 +16,7 @@ import { CommonImports } from '../../Global.constant';
 
 export class SubmitEnquiry implements OnInit, OnDestroy {
 
-  masterService = inject(MasterService); 
+  masterService = inject(MasterService);
   cdr = inject(ChangeDetectorRef);
 
   // statusList: IStatus[] = []; 
@@ -25,11 +25,11 @@ export class SubmitEnquiry implements OnInit, OnDestroy {
   $statusList: Observable<IStatus[]> = new Observable<IStatus[]>;
   $categoryList: Observable<ICategory[]> = new Observable<ICategory[]>;
 
-  newEnquiryObj:EnquiryModel = new EnquiryModel();
+  newEnquiryObj: EnquiryModel = new EnquiryModel();
 
   subscription!: Subscription;
 
-  constructor(){
+  constructor() {
     this.$categoryList = this.masterService.getAllCategory();
     this.$statusList = this.masterService.getAllStatus();
   }
@@ -57,20 +57,43 @@ export class SubmitEnquiry implements OnInit, OnDestroy {
   //   })
   // }
 
-  onSaveEnquiry(){
-    this.newEnquiryObj.statusId = '1';
-    this.subscription = this.masterService.saveEnquiry(this.newEnquiryObj).subscribe({
-      next:(result: any)=>{
+  onSaveEnquiry() {
+  // Setting default status id before saving
+  this.newEnquiryObj.statusId = 1;
+
+  // Creating a separate payload object
+  // so that the original form values are not modified
+  const payload = {
+
+    // Copy all existing form values
+    ...this.newEnquiryObj,
+
+    // Convert enquiryDate from yyyy-MM-dd to ISO format required by backend API
+    enquiryDate: new Date(
+      this.newEnquiryObj.enquiryDate
+    ).toISOString(),
+
+    // If followUpDate exists, convert it to ISO format Otherwise send current date-time
+    followUpDate: this.newEnquiryObj.followUpDate
+      ? new Date(this.newEnquiryObj.followUpDate).toISOString()
+      : new Date().toISOString()
+  };
+
+  // Check final payload in browser console
+  console.log(payload);
+
+  this.subscription = this.masterService.saveEnquiry(payload).subscribe({
+      next: (result: any) => {
         alert('Enquiry Submitted Successfully!');
       },
-      error(error: any){
+      error: (error: any) => {
+        console.log(error);
         alert('Error from API');
       }
-    })
-  }
+    });
+}
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
-
 }
