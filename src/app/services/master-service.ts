@@ -34,6 +34,14 @@ export class MasterService {
     return this.http.post('https://api.freeprojectapi.com/api/Enquiry/create-enquiry', obj);
   }
 
+  updateEnquiry(id: number, obj: any){
+    return this.http.put(`https://api.freeprojectapi.com/api/Enquiry/update-enquiry/${id}?id=${id}`, obj);
+  }
+
+  deleteEnquiry(id: number){
+    return this.http.delete(`https://api.freeprojectapi.com/api/Enquiry/delete-enquiry/${id}?id=${id}`);
+  }
+
   getAllEnquiry(){
     return this.http.get('https://api.freeprojectapi.com/api/Enquiry/get-enquiries');
   }
