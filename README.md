@@ -3,6 +3,9 @@
 A modern Angular-based enquiry management application with a responsive Bootstrap UI, authentication guard, and backend API integration for submitting and tracking customer enquiries.
 
 
+🔗 Live Demo: https://enquiry-management-system-three.vercel.app
+
+
 ## 🚀 Project Overview
 
 Enquiry Management System is a single-page web application built with Angular 21 and Bootstrap 5. It allows admins to log in, browse all enquiries in a structured card layout, users to view a styled enquiry dashboard and submit new enquiries.
@@ -116,7 +119,15 @@ npm install
 ng serve
 ```
 
-The application will open automatically at `http://localhost:4200/`
+
+The application will be available locally at:
+
+http://localhost:4200
+
+For a deployed version, visit:
+
+https://enquiry-management-system-three.vercel.app
+
 
 ### Step 4: Login
 Use the following test credentials:
