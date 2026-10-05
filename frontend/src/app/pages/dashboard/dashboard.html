@@ -1,0 +1,353 @@
+<div class="app-page dashboard-page">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="dashboard-header-wrapper">
+      <div class="header-content">
+        <span class="app-page-eyebrow">
+          <i class="bi bi-speedometer2"></i> Workspace Overview
+        </span>
+        <h1 class="app-page-title">Enquiry Management</h1>
+        <p class="app-page-subtitle">
+          Manage customer enquiries, track follow-ups, and keep your customer support workflow organized.
+        </p>
+      </div>
+      <div class="header-actions">
+        <a routerLink="/submit-enquiry" class="btn btn-primary">
+          <i class="bi bi-plus-circle"></i>
+          <span>Submit New Enquiry</span>
+        </a>
+        <a routerLink="/enquiry-list" class="btn btn-outline-secondary">
+          <i class="bi bi-inbox"></i>
+          <span>View Enquiries</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Live MongoDB Database Metrics Section -->
+    <div class="dashboard-metrics-section mb-4" *ngIf="isLoggedIn">
+      <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge badge-success">
+            <i class="bi bi-database-check me-1"></i> Live MongoDB Analytics
+          </span>
+          <span class="text-muted small">Real-time pipeline calculations</span>
+        </div>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+          (click)="loadStats()"
+          [disabled]="isLoadingStats"
+          title="Refresh database metrics"
+        >
+          <i class="bi bi-arrow-clockwise" [ngClass]="{ 'spin-icon': isLoadingStats }"></i>
+          <span>Refresh</span>
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoadingStats" class="row g-3">
+        <div class="col-6 col-md-3" *ngFor="let i of [1, 2, 3, 4]">
+          <div class="app-card p-3 text-center">
+            <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"></div>
+            <div class="small text-muted">Calculating...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Metrics Cards -->
+      <div *ngIf="!isLoadingStats && stats" class="row g-3">
+        <!-- Metric 1: Total Enquiries -->
+        <div class="col-6 col-md-3">
+          <div class="app-card p-3 metric-card">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="metric-label">Total Enquiries</span>
+              <div class="metric-icon-box icon-blue">
+                <i class="bi bi-inbox"></i>
+              </div>
+            </div>
+            <div class="metric-value text-primary">{{ stats.totalEnquiries }}</div>
+            <span class="metric-subtext">All database records</span>
+          </div>
+        </div>
+
+        <!-- Metric 2: New Inquiries -->
+        <div class="col-6 col-md-3">
+          <div class="app-card p-3 metric-card">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="metric-label">New / Open</span>
+              <div class="metric-icon-box icon-amber">
+                <i class="bi bi-bell"></i>
+              </div>
+            </div>
+            <div class="metric-value text-warning">{{ stats.newEnquiries }}</div>
+            <span class="metric-subtext">Awaiting initial action</span>
+          </div>
+        </div>
+
+        <!-- Metric 3: In Progress -->
+        <div class="col-6 col-md-3">
+          <div class="app-card p-3 metric-card">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="metric-label">In Progress</span>
+              <div class="metric-icon-box icon-sky">
+                <i class="bi bi-arrow-repeat"></i>
+              </div>
+            </div>
+            <div class="metric-value text-info">{{ stats.inProgress }}</div>
+            <span class="metric-subtext">Active team follow-ups</span>
+          </div>
+        </div>
+
+        <!-- Metric 4: Converted -->
+        <div class="col-6 col-md-3">
+          <div class="app-card p-3 metric-card">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="metric-label">Converted Deals</span>
+              <div class="metric-icon-box icon-green">
+                <i class="bi bi-award"></i>
+              </div>
+            </div>
+            <div class="metric-value text-success">{{ stats.converted }}</div>
+            <span class="metric-subtext">Successful conversions</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offline/Connecting Banner if MongoDB not reachable yet -->
+      <div *ngIf="!isLoadingStats && statsError" class="app-card p-3 border-warning bg-subtle">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-exclamation-circle-fill text-warning fs-5"></i>
+          <div>
+            <strong class="d-block text-dark small">MongoDB Atlas Connection Pending</strong>
+            <span class="text-muted small">
+              To view live calculated metrics, add your MongoDB connection string in <code>backend/.env</code> and run <code>npm run seed</code>.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Overview Area (Two Column) -->
+    <div class="row g-4 mb-4">
+      <!-- Left: Introduction & Operational Value -->
+      <div class="col-lg-6">
+        <div class="app-card h-100 p-4 overview-intro-card">
+          <div class="card-eyebrow">
+            <span class="badge badge-primary">MEAN Stack Architecture</span>
+          </div>
+          <h2 class="overview-title">Centralized Customer Communications</h2>
+          <p class="overview-text">
+            EnquiryFlow provides your team with a structured, reliable pipeline to capture customer questions,
+            assign relevant categories, schedule follow-ups, and track lifecycle transitions until resolution.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-item-icon">
+                <i class="bi bi-check2"></i>
+              </div>
+              <div class="feature-item-content">
+                <strong>Instant Intake:</strong>
+                <span>Direct capture of customer contact information, requirements, and custom notes.</span>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-item-icon">
+                <i class="bi bi-check2"></i>
+              </div>
+              <div class="feature-item-content">
+                <strong>Structured Classification:</strong>
+                <span>Categorize requests accurately to route them to the right team or response queue.</span>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-item-icon">
+                <i class="bi bi-check2"></i>
+              </div>
+              <div class="feature-item-content">
+                <strong>Full Lifecycle Visibility:</strong>
+                <span>Monitor progress from initial contact to follow-up date and final conversion outcome.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="overview-footer-note">
+            <i class="bi bi-shield-check text-success"></i>
+            <span>Real-time API synchronization with MongoDB database via Express REST API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Lifecycle Workflow Concept Card -->
+      <div class="col-lg-6">
+        <div class="app-card h-100 p-4 workflow-card">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <span class="badge badge-info mb-1">Standard Operating Procedure</span>
+              <h2 class="workflow-card-title">Enquiry Lifecycle Workflow</h2>
+            </div>
+            <span class="workflow-step-count">4 Key Stages</span>
+          </div>
+          <p class="text-muted small mb-4">
+            A standardized, disciplined progression for handling every customer touchpoint consistently.
+          </p>
+
+          <div class="workflow-pipeline">
+            <!-- Stage 1 -->
+            <div class="workflow-stage">
+              <div class="stage-indicator">
+                <div class="stage-icon stage-icon-1">
+                  <i class="bi bi-file-earmark-plus"></i>
+                </div>
+                <div class="stage-line"></div>
+              </div>
+              <div class="stage-details">
+                <div class="stage-header">
+                  <span class="stage-number">Phase 01</span>
+                  <h4 class="stage-title">New Enquiry Intake</h4>
+                </div>
+                <p class="stage-desc">
+                  Capture customer contact details, inquiry type, classification category, and primary message.
+                </p>
+              </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="workflow-stage">
+              <div class="stage-indicator">
+                <div class="stage-icon stage-icon-2">
+                  <i class="bi bi-calendar-event"></i>
+                </div>
+                <div class="stage-line"></div>
+              </div>
+              <div class="stage-details">
+                <div class="stage-header">
+                  <span class="stage-number">Phase 02</span>
+                  <h4 class="stage-title">Scheduled Follow-up</h4>
+                </div>
+                <p class="stage-desc">
+                  Assign target follow-up dates to ensure timely communication and maintain customer responsiveness.
+                </p>
+              </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="workflow-stage">
+              <div class="stage-indicator">
+                <div class="stage-icon stage-icon-3">
+                  <i class="bi bi-arrow-repeat"></i>
+                </div>
+                <div class="stage-line"></div>
+              </div>
+              <div class="stage-details">
+                <div class="stage-header">
+                  <span class="stage-number">Phase 03</span>
+                  <h4 class="stage-title">Status Progression</h4>
+                </div>
+                <p class="stage-desc">
+                  Update status states (New, In Progress, Resolved) and log ongoing customer interaction feedback.
+                </p>
+              </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="workflow-stage">
+              <div class="stage-indicator">
+                <div class="stage-icon stage-icon-4">
+                  <i class="bi bi-check2-circle"></i>
+                </div>
+              </div>
+              <div class="stage-details">
+                <div class="stage-header">
+                  <span class="stage-number">Phase 04</span>
+                  <h4 class="stage-title">Conversion & Resolution</h4>
+                </div>
+                <p class="stage-desc">
+                  Mark inquiry as successfully converted into a business relationship or documented as closed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Utility / Feature Cards -->
+    <div class="section-title-wrapper mb-3">
+      <h3 class="section-heading">Core System Capabilities</h3>
+      <p class="section-subheading">Essential tools built into the application for efficient inquiry management.</p>
+    </div>
+
+    <div class="row g-3">
+      <!-- Card 1 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="app-card app-card-interactive h-100 p-4 utility-card">
+          <div class="utility-icon-box utility-icon-blue">
+            <i class="bi bi-folder2-open"></i>
+          </div>
+          <h4 class="utility-title">Organised Enquiries</h4>
+          <p class="utility-desc">
+            Keep all customer records structured, categorized, and ready for quick review with full contact history.
+          </p>
+          <a routerLink="/enquiry-list" class="utility-link">
+            <span>Access records</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="app-card app-card-interactive h-100 p-4 utility-card">
+          <div class="utility-icon-box utility-icon-green">
+            <i class="bi bi-diagram-3"></i>
+          </div>
+          <h4 class="utility-title">Status Tracking</h4>
+          <p class="utility-desc">
+            Track progress systematically through real-time status transitions from intake to final outcome.
+          </p>
+          <a routerLink="/enquiry-list" class="utility-link">
+            <span>Check pipeline</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="app-card app-card-interactive h-100 p-4 utility-card">
+          <div class="utility-icon-box utility-icon-amber">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+          <h4 class="utility-title">Follow-up Planning</h4>
+          <p class="utility-desc">
+            Establish disciplined follow-up targets with ISO date records so customer opportunities stay on schedule.
+          </p>
+          <a routerLink="/submit-enquiry" class="utility-link">
+            <span>Plan follow-up</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="app-card app-card-interactive h-100 p-4 utility-card">
+          <div class="utility-icon-box utility-icon-sky">
+            <i class="bi bi-person-lines-fill"></i>
+          </div>
+          <h4 class="utility-title">Customer Information</h4>
+          <p class="utility-desc">
+            Consolidate phone numbers, emails, messages, and qualitative feedback into single customer records.
+          </p>
+          <a routerLink="/enquiry-list" class="utility-link">
+            <span>View contacts</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

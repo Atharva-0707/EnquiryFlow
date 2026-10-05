@@ -1,0 +1,141 @@
+<header class="app-navbar-wrapper">
+  <nav class="app-navbar container" aria-label="Main Navigation">
+    <!-- Brand / Logo -->
+    <a class="navbar-brand" routerLink="/dashboard" (click)="closeMobileMenu()">
+      <div class="brand-icon">
+        <i class="bi bi-layers-half"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">Enquiry<span class="brand-name-accent">Flow</span></span>
+        <span class="brand-tag">CRM</span>
+      </div>
+    </a>
+
+    <!-- Mobile Hamburger Toggle -->
+    <button
+      class="mobile-toggle-btn d-lg-none"
+      type="button"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <i class="bi" [ngClass]="isMobileMenuOpen ? 'bi-x-lg' : 'bi-list'"></i>
+    </button>
+
+    <!-- Nav Menu & Actions (Desktop + Mobile) -->
+    <div class="navbar-collapse-custom" [class.show]="isMobileMenuOpen">
+      <!-- Main Nav Links -->
+      <ul class="navbar-nav-custom">
+        <li class="nav-item-custom">
+          <a
+            class="nav-link-custom"
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item-custom">
+          <a
+            class="nav-link-custom"
+            routerLink="/home"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >
+            <i class="bi bi-house"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item-custom">
+          <a
+            class="nav-link-custom"
+            routerLink="/enquiry-list"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >
+            <i class="bi bi-inbox"></i>
+            <span>Enquiries</span>
+          </a>
+        </li>
+        <li class="nav-item-custom">
+          <a
+            class="nav-link-custom"
+            routerLink="/submit-enquiry"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >
+            <i class="bi bi-plus-circle"></i>
+            <span>Submit Enquiry</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Actions Section -->
+      <div class="navbar-actions">
+        <!-- Logged Out State -->
+        <ng-container *ngIf="!isLoggedIn">
+          <button class="btn btn-primary btn-sm btn-auth" (click)="login(); closeMobileMenu()">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
+          </button>
+        </ng-container>
+
+        <!-- Logged In State -->
+        <ng-container *ngIf="isLoggedIn">
+          <div class="user-profile-badge">
+            <div class="user-avatar" title="{{ username }}">
+              <i class="bi bi-person-fill"></i>
+            </div>
+            <div class="user-details">
+              <span class="user-name">{{ username }}</span>
+              <span class="user-role">{{ role === 'admin' ? 'Administrator' : 'Support Specialist' }}</span>
+            </div>
+          </div>
+          <button class="btn btn-outline-danger btn-sm btn-logout" (click)="logout(); closeMobileMenu()" title="Log out">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="app-main-content">
+  <router-outlet />
+</main>
+
+<!-- Modern Toast Notification Container -->
+<div class="toast-container-global" aria-live="polite">
+  <div
+    *ngFor="let toast of toastService.toasts$ | async"
+    class="app-toast-alert"
+    [ngClass]="'toast-' + toast.type"
+  >
+    <div class="toast-icon-wrap">
+      <i
+        class="bi"
+        [ngClass]="{
+          'bi-check-circle-fill': toast.type === 'success',
+          'bi-exclamation-triangle-fill': toast.type === 'error',
+          'bi-info-circle-fill': toast.type === 'info',
+          'bi-exclamation-circle-fill': toast.type === 'warning'
+        }"
+      ></i>
+    </div>
+    <div class="toast-content-wrap">
+      <strong class="toast-title" *ngIf="toast.title">{{ toast.title }}</strong>
+      <p class="toast-text">{{ toast.message }}</p>
+    </div>
+    <button
+      type="button"
+      class="toast-close-btn"
+      (click)="closeToast(toast.id)"
+      aria-label="Dismiss toast"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+</div>

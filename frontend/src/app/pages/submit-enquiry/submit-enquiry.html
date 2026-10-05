@@ -1,0 +1,286 @@
+<div class="app-page submit-enquiry-page">
+  <div class="container form-page-container">
+    <!-- Page Header -->
+    <div class="app-page-header">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div>
+          <span class="app-page-eyebrow">
+            <i class="bi bi-file-earmark-plus"></i> Intake Portal
+          </span>
+          <h1 class="app-page-title">Submit New Enquiry</h1>
+          <p class="app-page-subtitle">
+            Fill out the structured form below to register a customer enquiry into the CRM pipeline.
+          </p>
+        </div>
+        <div>
+          <a routerLink="/enquiry-list" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i>
+            <span>View All Enquiries</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Form Form Container -->
+    <form (ngSubmit)="onSaveEnquiry()" class="enquiry-submission-form" autocomplete="on">
+      <!-- Section 1: Personal Information -->
+      <div class="app-card form-section-card mb-4">
+        <div class="form-section-header">
+          <div class="section-icon-box icon-blue">
+            <i class="bi bi-person-lines-fill"></i>
+          </div>
+          <div>
+            <h2 class="form-section-title">Personal Information</h2>
+            <p class="form-section-desc">Tell us how our team can contact the customer.</p>
+          </div>
+        </div>
+
+        <div class="form-section-body">
+          <div class="row g-3">
+            <!-- Full Name -->
+            <div class="col-md-6">
+              <label for="customerName" class="form-label">
+                <i class="bi bi-person"></i> Full Name <span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="customerName"
+                name="customerName"
+                [(ngModel)]="newEnquiryObj.customerName"
+                placeholder="e.g. Sarah Jenkins"
+                required
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="col-md-6">
+              <label for="customerPhone" class="form-label">
+                <i class="bi bi-telephone"></i> Phone Number <span class="required-star">*</span>
+              </label>
+              <input
+                type="tel"
+                class="form-control"
+                id="customerPhone"
+                name="customerPhone"
+                [(ngModel)]="newEnquiryObj.customerPhone"
+                placeholder="e.g. +1 (555) 234-5678"
+                required
+              />
+            </div>
+
+            <!-- Email Address -->
+            <div class="col-12">
+              <label for="customerEmail" class="form-label">
+                <i class="bi bi-envelope"></i> Email Address <span class="required-star">*</span>
+              </label>
+              <input
+                type="email"
+                class="form-control"
+                id="customerEmail"
+                name="customerEmail"
+                [(ngModel)]="newEnquiryObj.customerEmail"
+                placeholder="e.g. sarah.jenkins@company.com"
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Enquiry Details -->
+      <div class="app-card form-section-card mb-4">
+        <div class="form-section-header">
+          <div class="section-icon-box icon-green">
+            <i class="bi bi-chat-square-quote-fill"></i>
+          </div>
+          <div>
+            <h2 class="form-section-title">Enquiry Details</h2>
+            <p class="form-section-desc">Provide specifics regarding the customer's request.</p>
+          </div>
+        </div>
+
+        <div class="form-section-body">
+          <div class="row g-3">
+            <!-- Enquiry Type -->
+            <div class="col-md-6">
+              <label for="enquiryType" class="form-label">
+                <i class="bi bi-tag"></i> Enquiry Type <span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="enquiryType"
+                name="enquiryType"
+                [(ngModel)]="newEnquiryObj.enquiryType"
+                placeholder="e.g. Product Demo, Pricing, Support"
+                required
+              />
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+              <label for="categoryId" class="form-label">
+                <i class="bi bi-folder2"></i> Category <span class="required-star">*</span>
+              </label>
+              <select
+                class="form-select"
+                id="categoryId"
+                name="categoryId"
+                [(ngModel)]="newEnquiryObj.categoryId"
+                required
+              >
+                <option [ngValue]="0" disabled selected>Select a category</option>
+                <option *ngFor="let item of $categoryList | async" [ngValue]="item.categoryId">
+                  {{ item.categoryName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div class="col-12">
+              <label for="message" class="form-label">
+                <i class="bi bi-pencil-square"></i> Enquiry Message <span class="required-star">*</span>
+              </label>
+              <textarea
+                class="form-control"
+                id="message"
+                name="message"
+                [(ngModel)]="newEnquiryObj.message"
+                rows="5"
+                placeholder="Detail the customer request, questions, requirements, or context..."
+                required
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Additional Information -->
+      <div class="app-card form-section-card mb-4">
+        <div class="form-section-header">
+          <div class="section-icon-box icon-amber">
+            <i class="bi bi-calendar3"></i>
+          </div>
+          <div>
+            <h2 class="form-section-title">Additional Information</h2>
+            <p class="form-section-desc">Add target dates, conversion status, and optional notes.</p>
+          </div>
+        </div>
+
+        <div class="form-section-body">
+          <div class="row g-3">
+            <!-- Enquiry Date -->
+            <div class="col-md-6">
+              <label for="enquiryDate" class="form-label">
+                <i class="bi bi-calendar-event"></i> Enquiry Date <span class="required-star">*</span>
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="enquiryDate"
+                name="enquiryDate"
+                [(ngModel)]="newEnquiryObj.enquiryDate"
+                required
+              />
+            </div>
+
+            <!-- Conditional Status dropdown (if editing existing) -->
+            @if (newEnquiryObj.enquiryId !== 0) {
+              <div class="col-md-6">
+                <label for="statusId" class="form-label">
+                  <i class="bi bi-sliders"></i> Status <span class="required-star">*</span>
+                </label>
+                <select
+                  class="form-select"
+                  id="statusId"
+                  name="statusId"
+                  [(ngModel)]="newEnquiryObj.statusId"
+                  required
+                >
+                  <option [ngValue]="0" disabled>Select a status</option>
+                  <option *ngFor="let item of $statusList | async" [ngValue]="item.statusId">
+                    {{ item.statusName }}
+                  </option>
+                </select>
+              </div>
+            }
+
+            <!-- Converted Switch Card -->
+            <div class="col-12">
+              <div class="converted-toggle-card">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                  <div class="toggle-text-group">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                      <i class="bi bi-award-fill text-warning"></i>
+                      <span class="fw-semibold text-dark">Mark as Converted</span>
+                      <span class="badge" [ngClass]="newEnquiryObj.isConverted ? 'badge-success' : 'badge-neutral'">
+                        {{ newEnquiryObj.isConverted ? 'Converted' : 'Open Lead' }}
+                      </span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      Toggle on when this enquiry becomes a confirmed sale, deal, or closed partnership.
+                    </p>
+                  </div>
+                  <div class="form-check form-switch m-0">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="isConvertedSwitch"
+                      name="isConverted"
+                      [(ngModel)]="newEnquiryObj.isConverted"
+                      aria-label="Mark as converted toggle"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="col-12">
+              <label for="feedback" class="form-label">
+                <i class="bi bi-chat-text"></i> Internal Feedback & Follow-up Notes (Optional)
+              </label>
+              <textarea
+                class="form-control"
+                id="feedback"
+                name="feedback"
+                [(ngModel)]="newEnquiryObj.feedback"
+                rows="3"
+                placeholder="Add internal notes, call outcomes, or next action items..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons Footer Card -->
+      <div class="app-card form-actions-card p-3 p-md-4">
+        <div class="actions-wrapper">
+          <div class="actions-note">
+            <i class="bi bi-info-circle text-primary"></i>
+            <span>Enquiry will be recorded into the central database with default status ID: 1.</span>
+          </div>
+          <div class="actions-buttons">
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-action"
+              (click)="onResetForm()"
+            >
+              <i class="bi bi-arrow-counterclockwise"></i>
+              <span>Clear Form</span>
+            </button>
+            <button
+              type="button"
+              (click)="onSaveEnquiry()"
+              class="btn btn-primary btn-action"
+            >
+              <i class="bi bi-send-fill"></i>
+              <span>Submit Enquiry</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

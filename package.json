@@ -1,45 +1,22 @@
 {
-  "name": "enquiry-management-system",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
+  "name": "enquiry-management-system-monorepo",
+  "version": "1.0.0",
   "private": true,
-  "packageManager": "npm@11.6.2",
-  "dependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/compiler": "^21.1.0",
-    "@angular/core": "^21.1.0",
-    "@angular/forms": "^21.1.0",
-    "@angular/platform-browser": "^21.1.0",
-    "@angular/router": "^21.1.0",
-    "bootstrap": "^5.3.8",
-    "font-awesome": "^4.7.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+  "description": "Production MEAN Stack Customer Enquiry Management CRM Platform",
+  "scripts": {
+    "start:frontend": "npm --prefix frontend start",
+    "start:backend": "npm --prefix backend start",
+    "dev:frontend": "npm --prefix frontend start",
+    "dev:backend": "npm --prefix backend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "build": "npm --prefix frontend run build",
+    "test:frontend": "npm --prefix frontend test -- --watch=false",
+    "test": "npm --prefix frontend test -- --watch=false",
+    "seed": "npm --prefix backend run seed",
+    "install:all": "npm --prefix frontend install && npm --prefix backend install",
+    "dev": "concurrently -n \"FRONTEND,BACKEND\" -c \"cyan.bold,green.bold\" \"npm --prefix frontend start\" \"npm --prefix backend run dev\""
   },
   "devDependencies": {
-    "@angular/build": "^21.1.0",
-    "@angular/cli": "^21.1.0",
-    "@angular/compiler-cli": "^21.1.0",
-    "jsdom": "^27.1.0",
-    "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "concurrently": "^9.1.2"
   }
 }

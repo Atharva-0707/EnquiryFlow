@@ -1,0 +1,356 @@
+<div class="login-wrapper">
+  <div class="container login-container">
+    <div class="row g-0 login-layout-row app-card overflow-hidden">
+      <!-- Left Column: SaaS Branding & Features (Desktop) -->
+      <div class="col-lg-6 d-none d-lg-flex login-brand-col">
+        <div class="brand-col-content">
+          <div class="brand-badge mb-3">
+            <i class="bi bi-layers-half me-1"></i>
+            <span>EnquiryFlow CRM Platform</span>
+          </div>
+
+          <h2 class="brand-heading">
+            Manage, track, and convert customer enquiries faster.
+          </h2>
+
+          <p class="brand-subheading">
+            The enterprise workspace designed to eliminate lost customer follow-ups and keep support operations running smoothly.
+          </p>
+
+          <div class="brand-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <i class="bi bi-inbox-fill"></i>
+              </div>
+              <div class="highlight-text">
+                <strong>Structured Intake:</strong> Direct capture of questions, messages, and contact points.
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <i class="bi bi-calendar2-check-fill"></i>
+              </div>
+              <div class="highlight-text">
+                <strong>Scheduled Outreach:</strong> Target dates for proactive response and follow-up.
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <div class="highlight-text">
+                <strong>Conversion Tracking:</strong> Monitor customer transitions into confirmed sales.
+              </div>
+            </div>
+          </div>
+
+          <div class="brand-trust-badge">
+            <i class="bi bi-shield-check text-success me-2"></i>
+            <span>JWT Authentication & Role-Based Access Control</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Authentication Card Form -->
+      <div class="col-lg-6 login-form-col">
+        <div class="login-form-inner">
+          
+          <!-- Mode Switcher Tabs (Sign In vs Sign Up) -->
+          <div class="auth-tabs-wrapper mb-4">
+            <div class="auth-tabs" role="tablist">
+              <button
+                type="button"
+                class="auth-tab-btn"
+                [class.active]="!isSignUp"
+                (click)="setMode('signin')"
+                role="tab"
+                [attr.aria-selected]="!isSignUp"
+              >
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </button>
+              <button
+                type="button"
+                class="auth-tab-btn"
+                [class.active]="isSignUp"
+                (click)="setMode('signup')"
+                role="tab"
+                [attr.aria-selected]="isSignUp"
+              >
+                <i class="bi bi-person-plus-fill me-1"></i> Sign Up
+              </button>
+            </div>
+          </div>
+
+          <!-- Header -->
+          <div class="text-center mb-3">
+            <div class="login-avatar-box">
+              <i class="bi" [ngClass]="isSignUp ? 'bi-person-plus-fill' : 'bi-person-check-fill'"></i>
+            </div>
+            <h1 class="login-title">{{ isSignUp ? 'Create an Account' : 'Welcome to EnquiryFlow' }}</h1>
+            <p class="login-subtitle">
+              {{ isSignUp ? 'Register your account to access the CRM platform' : 'Sign in to access your enquiry workspace' }}
+            </p>
+          </div>
+
+          <!-- Error Alert Banner -->
+          <div *ngIf="errorMessage" class="alert alert-danger py-2 px-3 small d-flex align-items-center gap-2 mb-3" role="alert">
+            <i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i>
+            <div>{{ errorMessage }}</div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- SIGN IN FORM                               -->
+          <!-- ========================================== -->
+          <div *ngIf="!isSignUp">
+            <!-- Demo Credentials Banner -->
+            <div class="demo-credentials-box mb-3">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-key-fill text-primary"></i>
+                  <span class="fw-semibold text-dark small">Quick Demo Access</span>
+                </div>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Ready to use</span>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  class="btn btn-xs btn-outline-primary d-inline-flex align-items-center gap-1"
+                  (click)="fillAdminCredentials()"
+                  title="Autofill Admin credentials"
+                >
+                  <i class="bi bi-shield-lock-fill"></i> Autofill Admin (admin@example.com)
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-xs btn-outline-secondary d-inline-flex align-items-center gap-1"
+                  (click)="fillEmployeeCredentials()"
+                  title="Autofill Employee credentials"
+                >
+                  <i class="bi bi-person-badge"></i> Autofill Employee (employee@example.com)
+                </button>
+              </div>
+            </div>
+
+            <!-- Login Form -->
+            <form (ngSubmit)="onLogin()" autocomplete="on">
+              <!-- Username / Email Field -->
+              <div class="mb-3">
+                <label for="usernameInput" class="form-label">
+                  <i class="bi bi-envelope"></i> Email or Username
+                </label>
+                <input
+                  type="text"
+                  [(ngModel)]="loginObj.username"
+                  name="username"
+                  class="form-control"
+                  id="usernameInput"
+                  placeholder="admin@example.com"
+                  required
+                  autocomplete="username"
+                />
+              </div>
+
+              <!-- Password Field -->
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label for="passwordInput" class="form-label mb-0">
+                    <i class="bi bi-lock"></i> Password
+                  </label>
+                  <span class="small text-muted">Demo: <code>admin123</code></span>
+                </div>
+                <div class="password-input-wrapper">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    [(ngModel)]="loginObj.password"
+                    name="password"
+                    class="form-control"
+                    id="passwordInput"
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle-btn"
+                    (click)="togglePasswordVisibility()"
+                    [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+                    tabindex="-1"
+                  >
+                    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Remember Me -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="rememberMeCheckbox" checked />
+                  <label class="form-check-label small text-muted" for="rememberMeCheckbox">
+                    Keep me signed in
+                  </label>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  <i *ngIf="!isLoading" class="bi bi-box-arrow-in-right me-1"></i>
+                  <span>{{ isLoading ? 'Signing In...' : 'Sign In to Workspace' }}</span>
+                </button>
+              </div>
+            </form>
+
+            <div class="text-center mt-2">
+              <span class="small text-muted">Don't have an account? </span>
+              <button type="button" class="btn btn-link btn-sm p-0 fw-semibold text-primary" (click)="setMode('signup')">
+                Create one now
+              </button>
+            </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- SIGN UP FORM                               -->
+          <!-- ========================================== -->
+          <div *ngIf="isSignUp">
+            <form (ngSubmit)="onRegister()" autocomplete="on">
+              <!-- Full Name Field -->
+              <div class="mb-3">
+                <label for="regNameInput" class="form-label">
+                  <i class="bi bi-person"></i> Full Name <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  [(ngModel)]="registerObj.name"
+                  name="regName"
+                  class="form-control"
+                  id="regNameInput"
+                  placeholder="e.g. John Doe"
+                  required
+                  autocomplete="name"
+                />
+              </div>
+
+              <!-- Email Field -->
+              <div class="mb-3">
+                <label for="regEmailInput" class="form-label">
+                  <i class="bi bi-envelope"></i> Work Email <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="email"
+                  [(ngModel)]="registerObj.email"
+                  name="regEmail"
+                  class="form-control"
+                  id="regEmailInput"
+                  placeholder="name@company.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+
+              <!-- Role Selection -->
+              <div class="mb-3">
+                <label for="regRoleSelect" class="form-label">
+                  <i class="bi bi-shield-check"></i> Account Role
+                </label>
+                <select
+                  [(ngModel)]="registerObj.role"
+                  name="regRole"
+                  class="form-select"
+                  id="regRoleSelect"
+                >
+                  <option value="employee">Employee (View, Submit & Update Enquiries)</option>
+                  <option value="admin">Administrator (Full CRUD, Manage Metadata & Delete)</option>
+                </select>
+                <div class="form-text small">Select Administrator for complete management privileges.</div>
+              </div>
+
+              <!-- Password Field -->
+              <div class="mb-3">
+                <label for="regPasswordInput" class="form-label">
+                  <i class="bi bi-lock"></i> Password <span class="text-danger">*</span>
+                </label>
+                <div class="password-input-wrapper">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    [(ngModel)]="registerObj.password"
+                    name="regPassword"
+                    class="form-control"
+                    id="regPasswordInput"
+                    placeholder="Minimum 6 characters"
+                    required
+                    minlength="6"
+                    autocomplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle-btn"
+                    (click)="togglePasswordVisibility()"
+                    [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+                    tabindex="-1"
+                  >
+                    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirm Password Field -->
+              <div class="mb-3">
+                <label for="regConfirmPasswordInput" class="form-label">
+                  <i class="bi bi-lock-fill"></i> Confirm Password <span class="text-danger">*</span>
+                </label>
+                <div class="password-input-wrapper">
+                  <input
+                    [type]="showConfirmPassword ? 'text' : 'password'"
+                    [(ngModel)]="registerObj.confirmPassword"
+                    name="regConfirmPassword"
+                    class="form-control"
+                    id="regConfirmPasswordInput"
+                    placeholder="Re-enter your password"
+                    required
+                    autocomplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle-btn"
+                    (click)="toggleConfirmPasswordVisibility()"
+                    [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'"
+                    tabindex="-1"
+                  >
+                    <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  <i *ngIf="!isLoading" class="bi bi-person-plus-fill me-1"></i>
+                  <span>{{ isLoading ? 'Creating Account...' : 'Create Account & Sign In' }}</span>
+                </button>
+              </div>
+            </form>
+
+            <div class="text-center mt-2">
+              <span class="small text-muted">Already have an account? </span>
+              <button type="button" class="btn btn-link btn-sm p-0 fw-semibold text-primary" (click)="setMode('signin')">
+                Sign In instead
+              </button>
+            </div>
+          </div>
+
+          <!-- Footer Details -->
+          <div class="login-footer-info text-center mt-4">
+            <span class="small text-muted">
+              Protected by JWT & Auth Guards • MongoDB Persistence
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

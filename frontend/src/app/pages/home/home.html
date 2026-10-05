@@ -1,0 +1,262 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="home-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="hero-badge">
+            <span class="pulse-indicator"></span>
+            <span>Enterprise Enquiry Management CRM</span>
+          </div>
+          <h1 class="hero-title">
+            Streamline Customer Communications & Follow-ups
+          </h1>
+          <p class="hero-subtitle">
+            Capture incoming customer requests, assign structured categories, track pipeline status,
+            and maintain comprehensive contact histories in one unified business workspace.
+          </p>
+          <div class="hero-actions">
+            <a routerLink="/submit-enquiry" class="btn btn-primary btn-lg">
+              <i class="bi bi-plus-circle"></i>
+              <span>Submit an Enquiry</span>
+            </a>
+            <a routerLink="/enquiry-list" class="btn btn-outline-secondary btn-lg">
+              <i class="bi bi-inbox"></i>
+              <span>View Enquiries</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <!-- Mock CRM Pipeline Card (Interactive Preview, No Fake Charts/Stats) -->
+          <div class="hero-preview-card app-card p-3">
+            <div class="preview-header">
+              <div class="preview-title-wrap">
+                <span class="preview-dot"></span>
+                <span class="preview-title">Pipeline Queue Sample</span>
+              </div>
+              <span class="badge badge-primary">Sample View</span>
+            </div>
+
+            <div class="preview-item">
+              <div class="preview-item-top">
+                <span class="preview-client">Acme Corp Logistics</span>
+                <span class="badge badge-success">In Progress</span>
+              </div>
+              <p class="preview-item-msg">Inquiry regarding enterprise deployment timeline and SLA agreement.</p>
+              <div class="preview-meta">
+                <span><i class="bi bi-tag"></i> Enterprise</span>
+                <span><i class="bi bi-calendar"></i> Next Follow-up</span>
+              </div>
+            </div>
+
+            <div class="preview-item">
+              <div class="preview-item-top">
+                <span class="preview-client">Global Tech Solutions</span>
+                <span class="badge badge-warning">Pending Review</span>
+              </div>
+              <p class="preview-item-msg">Request for technical documentation and security compliance review.</p>
+              <div class="preview-meta">
+                <span><i class="bi bi-tag"></i> Security</span>
+                <span><i class="bi bi-calendar"></i> Scheduled</span>
+              </div>
+            </div>
+
+            <div class="preview-footer">
+              <i class="bi bi-check-circle-fill text-success"></i>
+              <span>Direct database synchronization via MasterService API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="home-section py-5">
+    <div class="container">
+      <div class="text-center section-header-block mb-4">
+        <span class="app-page-eyebrow">
+          <i class="bi bi-grid-fill"></i> Core Modules
+        </span>
+        <h2 class="section-title">Built for Efficient Enquiry Handling</h2>
+        <p class="section-description">
+          Purpose-built modules to streamline customer service workflows from intake to completion.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        <!-- Feature 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="app-card app-card-interactive h-100 p-4 feature-card">
+            <div class="feature-icon-wrapper icon-blue">
+              <i class="bi bi-inbox-fill"></i>
+            </div>
+            <h3 class="feature-title">View Enquiries</h3>
+            <p class="feature-desc">
+              Browse, inspect, and manage customer submissions in structured CRM cards with contact details and message histories.
+            </p>
+            <a routerLink="/enquiry-list" class="feature-action-link">
+              <span>Open enquiry list</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="app-card app-card-interactive h-100 p-4 feature-card">
+            <div class="feature-icon-wrapper icon-green">
+              <i class="bi bi-plus-circle-fill"></i>
+            </div>
+            <h3 class="feature-title">Submit Enquiry</h3>
+            <p class="feature-desc">
+              Fast, validated intake form with automated ISO date conversions, category selection, and optional customer feedback.
+            </p>
+            <a routerLink="/submit-enquiry" class="feature-action-link">
+              <span>Create enquiry</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="app-card app-card-interactive h-100 p-4 feature-card">
+            <div class="feature-icon-wrapper icon-amber">
+              <i class="bi bi-sliders"></i>
+            </div>
+            <h3 class="feature-title">Status Tracking</h3>
+            <p class="feature-desc">
+              Track enquiry progression across multiple lifecycle states and update statuses dynamically via the update modal.
+            </p>
+            <a routerLink="/enquiry-list" class="feature-action-link">
+              <span>Track statuses</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="app-card app-card-interactive h-100 p-4 feature-card">
+            <div class="feature-icon-wrapper icon-sky">
+              <i class="bi bi-bar-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Analytics & Insights</h3>
+            <p class="feature-desc">
+              Built-in data structure ready for volume reporting, category distribution analysis, and conversion rate assessment.
+            </p>
+            <span class="feature-status-note">
+              <i class="bi bi-info-circle"></i> Integrated architecture
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="home-section bg-subtle py-5">
+    <div class="container">
+      <div class="text-center section-header-block mb-4">
+        <span class="app-page-eyebrow">
+          <i class="bi bi-shield-check"></i> Enterprise Standards
+        </span>
+        <h2 class="section-title">Why Teams Choose EnquiryFlow</h2>
+        <p class="section-description">
+          A dependable CRM platform designed to eliminate dropped follow-ups and improve customer delight.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="app-card p-4 h-100 benefit-card">
+            <div class="d-flex align-items-start gap-3">
+              <div class="benefit-icon-box text-success bg-success-subtle">
+                <i class="bi bi-lightning-charge-fill"></i>
+              </div>
+              <div>
+                <h4 class="benefit-title">Rapid Response Processing</h4>
+                <p class="benefit-text">
+                  Eliminate spreadsheet chaos and disorganized email inboxes. Centralized records allow your team to respond faster and consistently.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="app-card p-4 h-100 benefit-card">
+            <div class="d-flex align-items-start gap-3">
+              <div class="benefit-icon-box text-primary bg-primary-subtle">
+                <i class="bi bi-shield-lock-fill"></i>
+              </div>
+              <div>
+                <h4 class="benefit-title">Enterprise Data Integrity</h4>
+                <p class="benefit-text">
+                  Strict TypeScript models, auth guard protection, and validated API payloads protect your customer database from inconsistencies.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="app-card p-4 h-100 benefit-card">
+            <div class="d-flex align-items-start gap-3">
+              <div class="benefit-icon-box text-info bg-info-subtle">
+                <i class="bi bi-phone-fill"></i>
+              </div>
+              <div>
+                <h4 class="benefit-title">Full Mobile & Desktop Support</h4>
+                <p class="benefit-text">
+                  Responsive user experience designed to work smoothly on smartphones, tablets, laptops, and ultra-wide desktop monitors.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="app-card p-4 h-100 benefit-card">
+            <div class="d-flex align-items-start gap-3">
+              <div class="benefit-icon-box text-warning bg-warning-subtle">
+                <i class="bi bi-headset"></i>
+              </div>
+              <div>
+                <h4 class="benefit-title">Dedicated Support Workflows</h4>
+                <p class="benefit-text">
+                  Track full customer details including phone numbers, emails, customer query messages, and follow-up reminders in one place.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner Section -->
+  <section class="cta-banner-section py-5">
+    <div class="container">
+      <div class="cta-banner-card app-card p-4 p-md-5 text-center">
+        <span class="badge badge-primary mb-2">Get Started</span>
+        <h2 class="cta-banner-title">Ready to Process Customer Enquiries?</h2>
+        <p class="cta-banner-desc mx-auto">
+          Capture new incoming leads or manage ongoing customer conversations through the active enquiry queue.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a routerLink="/submit-enquiry" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-circle"></i>
+            <span>Submit Enquiry</span>
+          </a>
+          <a routerLink="/enquiry-list" class="btn btn-outline-secondary btn-lg">
+            <i class="bi bi-inbox"></i>
+            <span>View Enquiries</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

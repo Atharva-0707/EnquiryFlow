@@ -1,0 +1,465 @@
+<div class="app-page enquiry-list-page">
+  <div class="container">
+    <!-- Page Header & Action Bar -->
+    <div class="enquiry-list-header-wrapper mb-4">
+      <div class="header-main">
+        <span class="app-page-eyebrow">
+          <i class="bi bi-inbox-fill"></i> CRM Database
+        </span>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <h1 class="app-page-title mb-0">Enquiries</h1>
+          <span class="badge badge-primary count-badge">
+            {{ enquiryList.length }} {{ enquiryList.length === 1 ? 'Enquiry' : 'Enquiries' }}
+          </span>
+        </div>
+        <p class="app-page-subtitle">
+          Track, update, and manage all customer enquiry records across your organization.
+        </p>
+      </div>
+
+      <div class="header-actions-group">
+        <a routerLink="/submit-enquiry" class="btn btn-primary">
+          <i class="bi bi-plus-circle"></i>
+          <span>Submit New Enquiry</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Error Alert if Backend/DB offline -->
+    <div *ngIf="errorMessage" class="alert alert-warning py-3 px-4 d-flex align-items-center gap-3 mb-4 app-card" role="alert">
+      <i class="bi bi-exclamation-triangle-fill text-warning fs-4 flex-shrink-0"></i>
+      <div class="flex-grow-1">
+        <strong class="d-block text-dark mb-1">Backend Connection Notice</strong>
+        <p class="mb-0 text-muted small">{{ errorMessage }}</p>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-secondary flex-shrink-0" (click)="getAllEnquiry()">
+        <i class="bi bi-arrow-clockwise me-1"></i> Retry
+      </button>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="app-card toolbar-card p-3 mb-4">
+      <div class="row g-2 align-items-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="search-input-wrapper">
+            <i class="bi bi-search search-icon"></i>
+            <input
+              type="text"
+              class="form-control search-input"
+              [(ngModel)]="searchTerm"
+              placeholder="Search by customer name, email, phone, code, or type..."
+              aria-label="Search enquiries"
+            />
+            <button
+              *ngIf="searchTerm"
+              class="search-clear-btn"
+              (click)="searchTerm = ''"
+              title="Clear search"
+              type="button"
+            >
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-6 text-md-end">
+          <span class="text-muted small">
+            Showing <strong>{{ filteredEnquiries.length }}</strong> of <strong>{{ enquiryList.length }}</strong> records
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Skeleton / Spinner State -->
+    <div *ngIf="isLoading" class="loading-state-wrapper app-card p-5 text-center my-4">
+      <div class="spinner-border text-primary mb-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <h3 class="h5 fw-bold text-dark mb-1">Loading Enquiries</h3>
+      <p class="text-muted small mb-0">Retrieving records from the MongoDB database...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div
+      *ngIf="!isLoading && filteredEnquiries.length === 0"
+      class="app-card empty-state-card text-center p-5 my-4"
+    >
+      <div class="empty-icon-box mb-3">
+        <i class="bi bi-inbox text-muted"></i>
+      </div>
+      <h3 class="empty-title mb-2">No Enquiries Found</h3>
+      <p class="empty-desc text-muted mx-auto mb-4">
+        {{ searchTerm ? 'No customer enquiries match your search query "' + searchTerm + '".' : 'There are currently no enquiry records in the system.' }}
+      </p>
+      <div class="d-flex justify-content-center gap-2">
+        <button *ngIf="searchTerm" class="btn btn-outline-secondary" (click)="searchTerm = ''">
+          Clear Search Filter
+        </button>
+        <a routerLink="/submit-enquiry" class="btn btn-primary">
+          <i class="bi bi-plus-circle"></i>
+          <span>Submit First Enquiry</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Enquiry Cards Grid -->
+    <div *ngIf="!isLoading && filteredEnquiries.length > 0" class="row g-3">
+      @for (item of filteredEnquiries; track item._id || item.enquiryId || $index) {
+        <div class="col-lg-6">
+          <div class="app-card enquiry-card h-100">
+            <!-- Card Top Header -->
+            <div class="enquiry-card-header">
+              <div class="customer-profile-block">
+                <div class="customer-avatar" [title]="item.customerName">
+                  {{ getInitials(item.customerName) }}
+                </div>
+                <div class="customer-info-meta">
+                  <h2 class="customer-name" [title]="item.customerName">{{ item.customerName }}</h2>
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="enquiry-id-badge">{{ getEnquiryCode(item) }}</span>
+                    <span class="enquiry-date">
+                      <i class="bi bi-calendar-event me-1"></i>
+                      {{ item.enquiryDate | date:'mediumDate' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Converted / Pipeline Status Indicator -->
+              <div>
+                <span
+                  class="badge"
+                  [ngClass]="item.isConverted ? 'badge-success' : 'badge-neutral'"
+                  title="Conversion status"
+                >
+                  <i class="bi" [ngClass]="item.isConverted ? 'bi-check-circle-fill' : 'bi-clock'"></i>
+                  {{ item.isConverted ? 'Converted' : 'Open' }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Badges Row -->
+            <div class="enquiry-badges-row">
+              <span class="badge badge-info" title="Status">
+                <i class="bi bi-flag-fill"></i>
+                {{ getStatusLabel(item) }}
+              </span>
+              <span class="badge badge-primary" title="Category">
+                <i class="bi bi-folder2"></i>
+                {{ getCategoryLabel(item) }}
+              </span>
+              <span class="badge badge-neutral" title="Enquiry Type" *ngIf="item.enquiryType">
+                <i class="bi bi-tag-fill"></i>
+                {{ item.enquiryType }}
+              </span>
+            </div>
+
+            <!-- Customer Contact Information -->
+            <div class="enquiry-contact-bar">
+              <div class="contact-item" title="Customer Email">
+                <i class="bi bi-envelope-fill contact-icon"></i>
+                <a [href]="'mailto:' + item.customerEmail" class="contact-link text-truncate">
+                  {{ item.customerEmail || 'No email provided' }}
+                </a>
+              </div>
+              <div class="contact-item" title="Customer Phone">
+                <i class="bi bi-telephone-fill contact-icon"></i>
+                <a [href]="'tel:' + item.customerPhone" class="contact-link">
+                  {{ item.customerPhone || 'No phone provided' }}
+                </a>
+              </div>
+            </div>
+
+            <!-- Message Box -->
+            <div class="enquiry-message-section">
+              <div class="message-label">
+                <i class="bi bi-chat-left-quote"></i> Enquiry Message:
+              </div>
+              <p class="message-content">
+                {{ item.message || 'No additional message provided.' }}
+              </p>
+            </div>
+
+            <!-- Follow-up & Feedback Bar -->
+            <div class="enquiry-meta-details">
+              <div class="meta-detail-item">
+                <span class="meta-label">Follow-up:</span>
+                <span class="meta-value">
+                  {{ item.followUpDate ? (item.followUpDate | date:'mediumDate') : 'Not scheduled' }}
+                </span>
+              </div>
+              <div class="meta-detail-item" *ngIf="item.feedback">
+                <span class="meta-label">Feedback:</span>
+                <span class="meta-value text-truncate">{{ item.feedback }}</span>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="enquiry-card-actions">
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm card-action-btn"
+                (click)="onUpdate(item)"
+              >
+                <i class="bi bi-pencil-square"></i>
+                <span>Update</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm card-action-btn"
+                (click)="onDelete(item._id || item.enquiryId)"
+                title="Delete enquiry"
+              >
+                <i class="bi bi-trash3"></i>
+                <span>Delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     Update Enquiry Modal Dialog (Safe Template)
+     ========================================================================== -->
+@if (showModal && selectedEnquiry) {
+  <div
+    class="modal-backdrop-custom"
+    (click)="closeModal()"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="modal-wrapper-custom"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+    <div class="modal-dialog-custom app-card">
+      <!-- Modal Header -->
+      <div class="modal-header-custom">
+        <div class="d-flex align-items-center gap-2">
+          <div class="modal-header-icon">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+          <div>
+            <h2 class="modal-title-custom" id="modalTitle">Update Enquiry</h2>
+            <span class="modal-subtitle-custom">
+              Record Code: <strong>{{ selectedEnquiry.enquiryCode || selectedEnquiry._id }}</strong>
+            </span>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="modal-close-btn"
+          (click)="closeModal()"
+          aria-label="Close modal"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Independently Scrollable) -->
+      <div class="modal-body-custom">
+        <form (ngSubmit)="onSaveUpdate()" autocomplete="off">
+          <div class="row g-3">
+            <!-- Full Name -->
+            <div class="col-md-6">
+              <label for="modalCustomerName" class="form-label">
+                <i class="bi bi-person"></i> Customer Name
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="modalCustomerName"
+                name="customerName"
+                [(ngModel)]="selectedEnquiry.customerName"
+                required
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="col-md-6">
+              <label for="modalCustomerPhone" class="form-label">
+                <i class="bi bi-telephone"></i> Phone Number
+              </label>
+              <input
+                type="tel"
+                class="form-control"
+                id="modalCustomerPhone"
+                name="customerPhone"
+                [(ngModel)]="selectedEnquiry.customerPhone"
+                required
+              />
+            </div>
+
+            <!-- Email Address -->
+            <div class="col-12">
+              <label for="modalCustomerEmail" class="form-label">
+                <i class="bi bi-envelope"></i> Email Address
+              </label>
+              <input
+                type="email"
+                class="form-control"
+                id="modalCustomerEmail"
+                name="customerEmail"
+                [(ngModel)]="selectedEnquiry.customerEmail"
+                required
+              />
+            </div>
+
+            <!-- Enquiry Type -->
+            <div class="col-md-6">
+              <label for="modalEnquiryType" class="form-label">
+                <i class="bi bi-tag"></i> Enquiry Type
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="modalEnquiryType"
+                name="enquiryType"
+                [(ngModel)]="selectedEnquiry.enquiryType"
+                required
+              />
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+              <label for="modalCategoryId" class="form-label">
+                <i class="bi bi-folder2"></i> Category
+              </label>
+              <select
+                class="form-select"
+                id="modalCategoryId"
+                name="categoryId"
+                [(ngModel)]="selectedEnquiry.categoryId"
+                required
+              >
+                <option *ngFor="let item of $categoryList | async" [value]="item._id || item.categoryId">
+                  {{ item.name || item.categoryName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Status Dropdown -->
+            <div class="col-md-6">
+              <label for="modalStatusId" class="form-label">
+                <i class="bi bi-flag"></i> Pipeline Status
+              </label>
+              <select
+                class="form-select"
+                id="modalStatusId"
+                name="statusId"
+                [(ngModel)]="selectedEnquiry.statusId"
+                required
+              >
+                <option *ngFor="let item of $statusList | async" [value]="item._id || item.statusId">
+                  {{ item.name || item.statusName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Converted Toggle -->
+            <div class="col-md-6">
+              <label class="form-label">
+                <i class="bi bi-award"></i> Conversion Outcome
+              </label>
+              <div class="modal-toggle-card">
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="small fw-semibold text-dark">Mark as Converted</span>
+                  <div class="form-check form-switch m-0">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="modalIsConverted"
+                      name="isConverted"
+                      [(ngModel)]="selectedEnquiry.isConverted"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enquiry Date -->
+            <div class="col-md-6">
+              <label for="modalEnquiryDate" class="form-label">
+                <i class="bi bi-calendar-event"></i> Enquiry Date
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="modalEnquiryDate"
+                name="enquiryDate"
+                [(ngModel)]="selectedEnquiry.enquiryDate"
+              />
+            </div>
+
+            <!-- Follow-up Date -->
+            <div class="col-md-6">
+              <label for="modalFollowUpDate" class="form-label">
+                <i class="bi bi-calendar-check"></i> Follow-up Date
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="modalFollowUpDate"
+                name="followUpDate"
+                [(ngModel)]="selectedEnquiry.followUpDate"
+              />
+            </div>
+
+            <!-- Message -->
+            <div class="col-12">
+              <label for="modalMessage" class="form-label">
+                <i class="bi bi-chat-square-quote"></i> Customer Message
+              </label>
+              <textarea
+                class="form-control"
+                id="modalMessage"
+                name="message"
+                [(ngModel)]="selectedEnquiry.message"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Feedback -->
+            <div class="col-12">
+              <label for="modalFeedback" class="form-label">
+                <i class="bi bi-chat-text"></i> Internal Notes & Feedback
+              </label>
+              <textarea
+                class="form-control"
+                id="modalFeedback"
+                name="feedback"
+                [(ngModel)]="selectedEnquiry.feedback"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer Actions -->
+      <div class="modal-footer-custom">
+        <button
+          type="button"
+          class="btn btn-outline-secondary modal-footer-btn"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary modal-footer-btn"
+          (click)="onSaveUpdate()"
+        >
+          <i class="bi bi-check-lg"></i>
+          <span>Save Changes</span>
+        </button>
+      </div>
+    </div>
+  </div>
+}
