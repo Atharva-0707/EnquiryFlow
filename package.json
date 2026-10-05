@@ -8,6 +8,7 @@
     "start:backend": "npm --prefix backend start",
     "dev:frontend": "npm --prefix frontend start",
     "dev:backend": "npm --prefix backend run dev",
+    "postinstall": "npm --prefix frontend install",
     "build:frontend": "npm --prefix frontend run build",
     "build": "npm --prefix frontend run build",
     "test:frontend": "npm --prefix frontend test -- --watch=false",

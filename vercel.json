@@ -1,5 +1,5 @@
 {
-  "outputDirectory": "dist/Enquiry-Management-System/browser",
+  "outputDirectory": "frontend/dist/Enquiry-Management-System/browser",
   "rewrites": [
     {
       "source": "/(.*)",
