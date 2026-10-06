@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  // Configure with your deployed backend URL on Render or similar
-  apiBaseUrl: '/api',
+  apiBaseUrl: 'https://enquiryflow-cnlu.onrender.com/api',
 };

@@ -24,18 +24,29 @@ connectDB();
 app.use(helmet());
 
 // CORS configuration
-const allowedOrigins = [
+const explicitOrigins = [
   process.env.CLIENT_URL,
+  'https://enquiry-management-system-three.vercel.app',
   'http://localhost:4200',
   'http://127.0.0.1:4200',
-].filter(Boolean);
+].flatMap((url) => (url ? url.split(',') : [])).map((s) => s.trim().replace(/\/$/, '')).filter(Boolean);
 
 app.use(
   cors({
     origin: function (origin, callback) {
       // Allow requests with no origin (like mobile apps, curl, postman)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      const cleanOrigin = origin.replace(/\/$/, '');
+      let isAllowed = explicitOrigins.includes(cleanOrigin) || process.env.NODE_ENV === 'development';
+      if (!isAllowed) {
+        try {
+          const parsed = new URL(origin);
+          if (parsed.hostname.endsWith('.vercel.app') || parsed.hostname === 'localhost') {
+            isAllowed = true;
+          }
+        } catch (_) {}
+      }
+      if (isAllowed) {
         return callback(null, true);
       }
       return callback(new Error('CORS policy: Access denied for this origin'));
