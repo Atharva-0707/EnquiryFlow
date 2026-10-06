@@ -4,21 +4,31 @@
 
 ---
 
+## 🌐 Live Demo & Deployment
+
+- 🚀 **Live Web Application (Vercel)**: [https://enquiry-management-system-three.vercel.app/](https://enquiry-management-system-three.vercel.app/)
+- 📡 **Live Backend REST API (Render)**: [https://enquiryflow-cnlu.onrender.com/api/health](https://enquiryflow-cnlu.onrender.com/api/health)
+
+---
+
 ## 📋 Table of Contents
 
-1. [Project Overview](#-project-overview)
-2. [Key Features](#-key-features)
-3. [Technology Stack](#-technology-stack)
-4. [Full-Stack Architecture & Monorepo Structure](#-full-stack-architecture--monorepo-structure)
-5. [Prerequisites & Environment Configuration](#-prerequisites--environment-configuration)
-6. [Quick Start & Local Setup](#-quick-start--local-setup)
-7. [Database Seeding](#-database-seeding)
-8. [Demo Credentials & Roles](#-demo-credentials--roles)
-9. [REST API Documentation](#-rest-api-documentation)
-10. [Angular Architecture & Best Practices](#-angular-architecture--best-practices)
-11. [Security Implementations](#-security-implementations)
-12. [Postman API Collection](#-postman-api-collection)
-13. [Production Deployment Guide](#-production-deployment-guide)
+1. [Live Demo & Deployment](#-live-demo--deployment)
+2. [Project Overview](#-project-overview)
+3. [Screenshots](#-screenshots)
+4. [Key Features](#-key-features)
+5. [Technology Stack](#-technology-stack)
+6. [Full-Stack Architecture & Monorepo Structure](#-full-stack-architecture--monorepo-structure)
+7. [Prerequisites & Environment Configuration](#-prerequisites--environment-configuration)
+8. [Quick Start & Local Setup](#-quick-start--local-setup)
+9. [Database Seeding](#-database-seeding)
+10. [Demo Credentials & Roles](#-demo-credentials--roles)
+11. [REST API Documentation](#-rest-api-documentation)
+12. [Angular Architecture & Best Practices](#-angular-architecture--best-practices)
+13. [Security Implementations](#-security-implementations)
+14. [Postman API Collection](#-postman-api-collection)
+15. [Testing](#-testing)
+16. [Author & Attribution](#-author--attribution)
 
 ---
 
@@ -30,6 +40,25 @@ The entire platform is organized as a clean **full-stack MEAN monorepo**:
 - **MongoDB + Mongoose**: Cloud database persistence with structured schemas, validations, and aggregation pipelines.
 - **Express.js + Node.js**: Scalable REST API with JWT authentication, role-based access control, security middleware (Helmet, CORS, Rate Limiting), and centralized error handling.
 - **Angular 21**: High-performance frontend utilizing standalone components, two-way data-bound forms with validation, functional HTTP interceptors (`Bearer` token injection), route guards, and toast notifications.
+
+---
+
+## 📸 Screenshots
+
+### 1. Analytics Dashboard & Live MongoDB Metrics
+![Analytics Dashboard](screenshots/03_dashboard.png)
+
+### 2. CRM Enquiry Management & Records
+![Customer Enquiries List](screenshots/04_enquiries_list.png)
+
+### 3. Structured Customer Intake Portal
+![Submit New Enquiry](screenshots/05_submit_enquiry.png)
+
+### 4. Authentication & Quick Demo Access
+![Login & Demo Access](screenshots/01_login.png)
+
+### 5. Account Registration Portal
+![Create Account](screenshots/02_register.png)
 
 ---
 
@@ -258,56 +287,6 @@ backend/postman_collection.json
 
 ---
 
-## 🚢 Production Deployment Guide
-
-### Step 1: Backend Deployment (Render)
-1. In your [Render Dashboard](https://dashboard.render.com), click **New +** → **Web Service**.
-2. Connect your GitHub repository: `Atharva-0707/Enquiry-Management-System`.
-3. Configure the Web Service:
-   - **Name**: `enquiryflow-api` (or your choice)
-   - **Root Directory**: `backend`
-   - **Runtime**: `Node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-4. Set Environment Variables in Render:
-   - `MONGODB_URI`: `<Your MongoDB Atlas connection string>`
-   - `JWT_SECRET`: `<A strong random secret>`
-   - `CLIENT_URL`: `https://<your-app>.vercel.app` (your Vercel frontend URL)
-   - `NODE_ENV`: `production`
-5. Click **Deploy Web Service**.
-6. Verify deployment by visiting: `https://<your-backend>.onrender.com/api/health`.
-
-### Step 2: Seed Production Database
-Once your Render backend is deployed and connected to MongoDB Atlas, run the seed script:
-```bash
-npm run seed
-```
-
-### Step 3: Configure Frontend with Render URL
-In `frontend/src/environments/environment.prod.ts`, set `apiBaseUrl` to your deployed Render URL:
-```typescript
-export const environment = {
-  production: true,
-  apiBaseUrl: 'https://<your-backend>.onrender.com/api',
-};
-```
-
-### Step 4: Frontend Deployment (Vercel)
-1. In your [Vercel Dashboard](https://vercel.com), click **Add New...** → **Project**.
-2. Select your GitHub repository: `Atharva-0707/Enquiry-Management-System`.
-3. Configure the Project:
-   - **Framework Preset**: `Angular`
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist/Enquiry-Management-System/browser`
-4. Click **Deploy**.
-5. Vercel automatically deploys your Angular SPA, and `frontend/vercel.json` ensures direct route refreshes (`/dashboard`, `/enquiry-list`, `/login`) resolve seamlessly to `index.html`.
-
-### Step 5: Final CORS Handshake
-In your Render Dashboard, ensure `CLIENT_URL` matches your actual production Vercel domain (e.g. `https://enquiry-management-system-three.vercel.app`), then trigger a redeploy if needed.
-
----
-
 ## 🧪 Testing
 
 Run frontend unit tests (Vitest):
@@ -325,5 +304,5 @@ npm run build
 ## 👨‍💻 Author & Attribution
 
 **Atharva Srivastava**  
-Full-Stack MEAN Developer  
+Full Stack Developer  
 Portfolio Project demonstrating enterprise full-stack design patterns with Angular 21, Express.js, and MongoDB Atlas.
